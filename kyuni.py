@@ -664,4 +664,4 @@ async def help(ctx):
     return
 
 
-client.run(dados.TOKEN())
+client.run(os.environ["TOKEN"])
