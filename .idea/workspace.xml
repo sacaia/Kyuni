@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4f5f15e0-f72b-4904-9cf5-6ed2891a4cf9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Bot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Bot.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dados.py" beforeDir="false" afterPath="$PROJECT_DIR$/dados.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kyuni.py" beforeDir="false" afterPath="$PROJECT_DIR$/kyuni.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,8 +100,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kyuni.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="666" column="28" selection-start-line="666" selection-start-column="28" selection-end-line="666" selection-end-column="28" />
+            <state relative-caret-position="307">
+              <caret line="647" column="40" lean-forward="true" selection-start-line="647" selection-start-column="40" selection-end-line="647" selection-end-column="40" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
                 <marker date="1561341507471" expanded="true" signature="11663:12183" ph="..." />
@@ -219,11 +215,6 @@
             <path>
               <item name="Kyuni" type="b2602c69:ProjectViewProjectNode" />
               <item name="Kyuni" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Kyuni" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Kyuni" type="462c0819:PsiDirectoryNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -495,8 +486,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kyuni.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="666" column="28" selection-start-line="666" selection-start-column="28" selection-end-line="666" selection-end-column="28" />
+        <state relative-caret-position="307">
+          <caret line="647" column="40" lean-forward="true" selection-start-line="647" selection-start-column="40" selection-end-line="647" selection-end-column="40" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
             <marker date="1561341507471" expanded="true" signature="11663:12183" ph="..." />
