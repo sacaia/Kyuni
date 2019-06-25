@@ -4,7 +4,7 @@ import dados
 import re
 
 def serverJaRegistrado(serverID):
-    file = open("data\\servers.txt", "r")
+    file = open("data/servers.txt", "r")
     for linha in file:
         l = linha[:-1]
         try:
@@ -19,7 +19,7 @@ def serverJaRegistrado(serverID):
     return False
 
 def getServer(serverID):
-    file = open("data\\servers.txt", "r")
+    file = open("data/servers.txt", "r")
     for linha in file:
         l = linha[:-1]
         try:
@@ -34,12 +34,12 @@ def getServer(serverID):
     return None
 
 def registrarServer(server):
-    file = open("data\\servers.txt", "a")
+    file = open("data/servers.txt", "a")
     file.write(json.dumps(server.__dict__) + "\n")
     file.close()
 
 def updateServer(server):
-    fileR = open("data\\servers.txt", "r")
+    fileR = open("data/servers.txt", "r")
     linhas = fileR.readlines()
     novasLinhas = []
     for linha in linhas:
@@ -52,12 +52,12 @@ def updateServer(server):
         novasLinhas.append(linha)
     fileR.close()
 
-    fileW = open("data\\servers.txt", "w")
+    fileW = open("data/servers.txt", "w")
     fileW.writelines(novasLinhas)
     fileW.close()
 
 def getLogChannelID(serverID):
-    file = open("data\\servers.txt", "r")
+    file = open("data/servers.txt", "r")
     linhas = file.readlines()
     for linha in linhas:
         l = linha[:-1]

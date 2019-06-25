@@ -26,6 +26,7 @@ embed_help.colour = discord.Colour.dark_purple()
 embed_help.title = "Lista de comandos"
 embed_help.description = "Para usar qualquer comando basta usar `.<comando>`\n"
 embed_help.description +="**Ações:**\n`bite` `slap` `cry` `highfive` `blush` `lick` `pat` `hug` `cuddle` `nuzzle` `kiss`\n"
+embed_help.description +="**RPG:**\n`roll`\n"
 embed_help.description +="**Staff:**\n`clear` `log` `rolepicker`\n"
 embed_help.set_footer(text="Para informações sobre cada comando use `.help <comando>`")
 ##############EMBED-BITE##############
@@ -118,6 +119,18 @@ embed_kiss.description = "`.kiss @user` : *Beija um ou mais usuarios*\n"
 embed_kiss.description +="Escolhe uma imagem ou um gif aleatório para ser exibido\n\n"
 embed_kiss.description +="**Extenções**\n`-img` : Necessariamente escolhe uma imagem\n`-gif` : Necessariamente escolhe um gif"
 embed_kiss.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
+##############EMBED-ROLL##############
+embed_roll = discord.Embed()
+embed_roll.colour = discord.Colour.dark_purple()
+embed_roll.set_thumbnail(url="https://cdn.discordapp.com/attachments/592521078597746698/592882908239495170/roll.jpg")
+embed_roll.title = "Roll help"
+embed_roll.description = "`.roll <repetições>* <dado>` ou `.roll <dado> <repetições>*` : *Joga um `<dado>`*\n"
+embed_roll.description +="Pode-se jogar diversos dados em apenas um comando, basta repetir os parâmetros `<dado>` e `<repetições>` quantas vezes quiser\n"
+embed_roll.description +="Exemplos: `.roll d2` `.roll 2 d6` `.roll d10 4` `.roll 2 d4 d6 5 3 d10`\n"
+embed_roll.description +="Dica: pode-se escrever `.roll 3x d6, 2x d20` para facilitar o entendimento\n\n"
+embed_roll.description +="**Parâmetros**\n`<dado>` : Um `<dado>` é definido por `dX` onde `X` é um numero inteiro, correspondente a quantidade de lados do dado\n"
+embed_roll.description +="`<repetições>` *__Opcional__: Número de vezes que se pretende lançar o dado. Caso seja omitido será considerado 1\n\n"
+#embed_roll.set_footer(text="Pode-se escrever .roll 3x d6, 2x d20 para facilitar o entendimento")
 ##############EMBED-CLEAR##############
 embed_clear = discord.Embed()
 embed_clear.colour = discord.Colour.dark_purple()
@@ -125,7 +138,7 @@ embed_clear.colour = discord.Colour.dark_purple()
 embed_clear.title = "Clear help"
 embed_clear.description = "`.clear <qtd>` : *deleta a `<qtd>` de mensagens no canal*\n`cl <qtd>` também pode ser utilizado\n\n"
 embed_clear.description +="**Parâmetros**\n`<qtd>` : Deve ser um _numero inteiro_ correspondente a quantidade de mensagens que se deseja apagar (limite de 100 mensagens por vez)"
-#embed_clear.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
+embed_clear.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador")
 ##############EMBED-LOG##############
 embed_log = discord.Embed()
 embed_log.colour = discord.Colour.dark_purple()
@@ -135,7 +148,7 @@ embed_log.description = "`.log <#canal>` : *define `<#canal>` como o canal de lo
 embed_log.description +="Caso um canal já tenha sido definido este será atualizado para o novo `<#canal>`\n\n"
 embed_log.description +="**Parâmetros**\n`<#canal>` : Deve ser uma __mensão a um canal textual__ correspondente ao canal que se deseja mandar as mensagens de log\n\n"
 embed_log.description +="**Extenções**\n`-clear` : Não necessita de parâmetros. Remove o canal de log do servidor"
-#embed_log.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
+embed_log.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador")
 ##############EMBED-ROLEPICKER##############
 embed_rolepicker = discord.Embed()
 embed_rolepicker.colour = discord.Colour.dark_purple()
@@ -147,7 +160,7 @@ embed_rolepicker.description +="A mensagem pode conter textos, menções, imagen
 embed_rolepicker.description +="Para **editar** o `rolepicker` basta editar a mensagem, mantendo a quantidade de __menções de cargos__ iguais a de __emojis__\n"
 embed_rolepicker.description +="Para **excluir** o `rolepicker` basta excluir a mensagem\n\n"
 embed_rolepicker.description +="**Parâmetros**\n`<#canal>` : Deve ser uma __mensão a um canal textual__ correspondente ao canal que se deseja mandar a mensagens de log\n\n"
-#embed_log.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
+embed_log.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador")
 ######################################
 
 client = commands.Bot(command_prefix=".")
@@ -283,22 +296,22 @@ async def bite(ctx):
         return
 
     if ("-img" in ctx.message.content):
-        file = discord.File("bite\\img\\" + str(random.choice(os.listdir("bite\\img\\"))), filename="bite.jpg")
+        file = discord.File("bite/img/" + str(random.choice(os.listdir("bite/img/"))), filename="bite.jpg")
     elif ("-gif" in ctx.message.content):
-        file = discord.File("bite\\gif\\" + str(random.choice(os.listdir("bite\\gif\\"))), filename="bite.gif")
+        file = discord.File("bite/gif/" + str(random.choice(os.listdir("bite/gif/"))), filename="bite.gif")
     else:
         imgOrGif = random.randint(0,1000)
         if (imgOrGif < 700):
-            file = discord.File("bite\\gif\\" + str(random.choice(os.listdir("bite\\gif\\"))), filename="bite.gif")
+            file = discord.File("bite/gif/" + str(random.choice(os.listdir("bite/gif/"))), filename="bite.gif")
         else:
-            file = discord.File("bite\\img\\" + str(random.choice(os.listdir("bite\\img\\"))), filename="bite.jpg")
+            file = discord.File("bite/img/" + str(random.choice(os.listdir("bite/img/"))), filename="bite.jpg")
 
     ret = "**" + ctx.message.author.display_name + "** mordeu "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
 
-    ret = ret[:(len(ret) - 2)]
+    ret = ret[:-2]
 
     await ctx.send(ret, file=file)
     return
@@ -311,14 +324,14 @@ async def slap(ctx):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
 
-    file = discord.File("slap\\gif\\" + str(random.choice(os.listdir("slap\\gif\\"))), filename="slap.gif")
+    file = discord.File("slap/gif/" + str(random.choice(os.listdir("slap/gif/"))), filename="slap.gif")
 
     ret = "**" + ctx.message.author.display_name + "** deu um tapa em "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
 
-    ret = ret[:(len(ret) - 2)]
+    ret = ret[:-2]
 
     await ctx.send(ret, file=file)
     return
@@ -328,7 +341,7 @@ async def slap(ctx):
 @commands.guild_only()
 async def cry(ctx):
 
-    file = discord.File("cry\\gif\\" + str(random.choice(os.listdir("cry\\gif\\"))), filename="cry.gif")
+    file = discord.File("cry/gif/" + str(random.choice(os.listdir("cry/gif/"))), filename="cry.gif")
 
     await ctx.send(file=file)
     return
@@ -341,14 +354,14 @@ async def highfive(ctx):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
 
-    file = discord.File("highfive\\gif\\" + str(random.choice(os.listdir("highfive\\gif\\"))), filename="highfive.gif")
+    file = discord.File("highfive/gif/" + str(random.choice(os.listdir("highfive/gif/"))), filename="highfive.gif")
 
     ret = "**" + ctx.message.author.display_name + "** highfive "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
 
-    ret = ret[:(len(ret) - 2)]
+    ret = ret[:-2]
     ret += "!"
 
     await ctx.send(ret, file=file)
@@ -359,15 +372,15 @@ async def highfive(ctx):
 @commands.guild_only()
 async def blush(ctx):
     if ("-img" in ctx.message.content):
-        file = discord.File("blush\\img\\" + str(random.choice(os.listdir("blush\\img\\"))), filename="blush.jpg")
+        file = discord.File("blush/img/" + str(random.choice(os.listdir("blush/img/"))), filename="blush.jpg")
     elif ("-gif" in ctx.message.content):
-        file = discord.File("blush\\gif\\" + str(random.choice(os.listdir("blush\\gif\\"))), filename="blush.gif")
+        file = discord.File("blush/gif/" + str(random.choice(os.listdir("blush/gif/"))), filename="blush.gif")
     else:
         imgOrGif = random.randint(0,1000)
         if (imgOrGif < 600):
-            file = discord.File("blush\\gif\\" + str(random.choice(os.listdir("blush\\gif\\"))), filename="blush.gif")
+            file = discord.File("blush/gif/" + str(random.choice(os.listdir("blush/gif/"))), filename="blush.gif")
         else:
-            file = discord.File("blush\\img\\" + str(random.choice(os.listdir("blush\\img\\"))), filename="blush.jpg")
+            file = discord.File("blush/img/" + str(random.choice(os.listdir("blush/img/"))), filename="blush.jpg")
 
     ret = "**" + ctx.message.author.display_name + "** corou"
 
@@ -382,13 +395,13 @@ async def lick(ctx):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
 
-    file = discord.File("lick\\gif\\" + str(random.choice(os.listdir("lick\\gif\\"))), filename="lick.gif")
+    file = discord.File("lick/gif/" + str(random.choice(os.listdir("lick/gif/"))), filename="lick.gif")
 
     ret = "**" + ctx.message.author.display_name + "** lambeu "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
-    ret = ret[:(len(ret) - 2)]
+    ret = ret[:-2]
 
     await ctx.send(ret, file=file)
     return
@@ -401,13 +414,13 @@ async def pat(ctx):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
 
-    file = discord.File("pat\\gif\\" + str(random.choice(os.listdir("pat\\gif\\"))), filename="pat.gif")
+    file = discord.File("pat/gif/" + str(random.choice(os.listdir("pat/gif/"))), filename="pat.gif")
 
     ret = "**" + ctx.message.author.display_name + "** acariciou "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
-    ret = ret[:(len(ret) - 2)]
+    ret = ret[:-2]
     ret += " ❤"
 
     await ctx.send(ret, file=file)
@@ -422,15 +435,15 @@ async def hug(ctx):
         return
 
     if ("-img" in ctx.message.content):
-        file = discord.File("hug\\img\\" + str(random.choice(os.listdir("hug\\img\\"))), filename="hug.jpg")
+        file = discord.File("hug/img/" + str(random.choice(os.listdir("hug/img/"))), filename="hug.jpg")
     elif ("-gif" in ctx.message.content):
-        file = discord.File("hug\\gif\\" + str(random.choice(os.listdir("hug\\gif\\"))), filename="hug.gif")
+        file = discord.File("hug/gif/" + str(random.choice(os.listdir("hug/gif/"))), filename="hug.gif")
     else:
         imgOrGif = random.randint(0,1000)
         if (imgOrGif < 600):
-            file = discord.File("hug\\gif\\" + str(random.choice(os.listdir("hug\\gif\\"))), filename="hug.gif")
+            file = discord.File("hug/gif/" + str(random.choice(os.listdir("hug/gif/"))), filename="hug.gif")
         else:
-            file = discord.File("hug\\img\\" + str(random.choice(os.listdir("hug\\img\\"))), filename="hug.jpg")
+            file = discord.File("hug/img/" + str(random.choice(os.listdir("hug/img/"))), filename="hug.jpg")
 
     ret = "**" + ctx.message.author.display_name + "** abraçou "
 
@@ -450,21 +463,21 @@ async def cuddle(ctx):
         return
 
     if ("-img" in ctx.message.content):
-        file = discord.File("cuddle\\img\\" + str(random.choice(os.listdir("cuddle\\img\\"))), filename="cuddle.jpg")
+        file = discord.File("cuddle/img/" + str(random.choice(os.listdir("cuddle/img/"))), filename="cuddle.jpg")
     elif ("-gif" in ctx.message.content):
-        file = discord.File("cuddle\\gif\\" + str(random.choice(os.listdir("cuddle\\gif\\"))), filename="cuddle.gif")
+        file = discord.File("cuddle/gif/" + str(random.choice(os.listdir("cuddle/gif/"))), filename="cuddle.gif")
     else:
         imgOrGif = random.randint(0, 1000)
         if (imgOrGif < 500):
-            file = discord.File("cuddle\\gif\\" + str(random.choice(os.listdir("cuddle\\gif\\"))), filename="cuddle.gif")
+            file = discord.File("cuddle/gif/" + str(random.choice(os.listdir("cuddle/gif/"))), filename="cuddle.gif")
         else:
-            file = discord.File("cuddle\\img\\" + str(random.choice(os.listdir("cuddle\\img\\"))), filename="cuddle.jpg")
+            file = discord.File("cuddle/img/" + str(random.choice(os.listdir("cuddle/img/"))), filename="cuddle.jpg")
 
     ret = "**" + ctx.message.author.display_name + "** abraçou "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
-    ret = ret[:(len(ret) - 2)]
+    ret = ret[:-2]
     ret += " 💞"
 
     await ctx.send(ret, file=file)
@@ -478,13 +491,13 @@ async def nuzzle(ctx):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
 
-    file = discord.File("nuzzle\\gif\\" + str(random.choice(os.listdir("nuzzle\\gif\\"))), filename="nuzzle.gif")
+    file = discord.File("nuzzle/gif/" + str(random.choice(os.listdir("nuzzle/gif/"))), filename="nuzzle.gif")
 
     ret = "**" + ctx.message.author.display_name + "** se esfregou em "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
-    ret = ret[:(len(ret) - 2)]
+    ret = ret[:-2]
 
     await ctx.send(ret, file=file)
     return
@@ -498,27 +511,81 @@ async def kiss(ctx):
         return
 
     if ("-img" in ctx.message.content):
-        file = discord.File("kiss\\img\\" + str(random.choice(os.listdir("kiss\\img\\"))), filename="kiss.jpg")
+        file = discord.File("kiss/img/" + str(random.choice(os.listdir("kiss/img/"))), filename="kiss.jpg")
     elif ("-gif" in ctx.message.content):
-        file = discord.File("kiss\\gif\\" + str(random.choice(os.listdir("kiss\\gif\\"))), filename="kiss.gif")
+        file = discord.File("kiss/gif/" + str(random.choice(os.listdir("kiss/gif/"))), filename="kiss.gif")
     else:
         imgOrGif = random.randint(0, 1000)
         if (imgOrGif < 500):
-            file = discord.File("kiss\\gif\\" + str(random.choice(os.listdir("kiss\\gif\\"))), filename="kiss.gif")
+            file = discord.File("kiss/gif/" + str(random.choice(os.listdir("kiss/gif/"))), filename="kiss.gif")
         else:
-            file = discord.File("kiss\\img\\" + str(random.choice(os.listdir("kiss\\img\\"))), filename="kiss.jpg")
+            file = discord.File("kiss/img/" + str(random.choice(os.listdir("kiss/img/"))), filename="kiss.jpg")
 
     ret = "**" + ctx.message.author.display_name + "** beijou "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
-    ret = ret[:(len(ret) - 2)]
+    ret = ret[:-2]
     ret += " 💗"
 
     await ctx.send(ret, file=file)
     return
 
-####################.clear###########################
+####################.ROLL###########################
+@client.command()
+async def roll(ctx):
+
+    content = ctx.message.content
+    dados = re.findall(r"d\d+", content)
+    if (not dados):
+        await ctx.send("Especifique pelo menos 1 dado!\nExemplo: `.roll d6`")
+        return
+
+    for d in dados:
+        content = content.replace(d, "")
+
+    qtds  = re.findall(r"\d+", content)
+    if(qtds and len(qtds) != len(dados)):
+        await ctx.send("Especifique todas as quantidades ou nenhuma quantidade de dados")
+        return
+
+    if(not qtds):
+        for i in range(len(dados)):
+            qtds.append("1")
+
+    for i in range(len(dados)):
+        dados[i] = dados[i][1:]
+
+    if(len(dados) == 1 and int(qtds[0]) < 10):
+        ret = ctx.author.mention + " tirou: "
+        for i in range(int(qtds[0])):
+            ret += str((random.randint(0, int(dados[0]) * 10) % int(dados[0])) + 1) + ", "
+        ret = ret[:-2]
+        await ctx.send(ret)
+        return
+
+    ret = "Resultados para " + ctx.author.mention + ":\n"
+
+    for i in range(len(dados)):
+        d = dados[i]
+        soma = 0
+        ret += "**d" + d + "** ["
+        for j in range(int(qtds[i])):
+            valor = (random.randint(0, int(d) * 10) % int(d)) + 1
+            soma += valor
+            ret += str(valor) + ", "
+        ret = ret[:-2] + "]\n"
+        if(int(qtds[i]) != 1):
+            ret += "Total: " + str(soma) + "\n"
+
+    await ctx.send(ret)
+
+####################.FICHA###########################
+@client.command()
+async def ficha(ctx):
+    pass
+
+####################.CLEAR###########################
 @client.command()
 @commands.guild_only()
 @commands.has_permissions(manage_messages=True)
@@ -561,7 +628,7 @@ async def log_error(ctx, error):
     if isinstance(error, discord.ext.commands.errors.MissingPermissions):
         await ctx.send("Desculpe-me <@" + str(ctx.message.author.id) + "> você não tem permissão para isso")
 
-####################.rolePicker###########################
+####################.ROLEPICKER###########################
 @client.command()
 @commands.guild_only()
 @commands.has_permissions(administrator=True)
@@ -658,6 +725,10 @@ async def help(ctx):
 
     elif ("rolepicker" in ctx.message.content):
         await ctx.send(embed=embed_rolepicker)
+        return
+
+    elif ("roll" in ctx.message.content):
+        await ctx.send(embed=embed_roll)
         return
 
     await ctx.send(embed=embed_help)
