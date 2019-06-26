@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+"""Created by: Sacaia"""
 import discord
 from discord.ext import tasks, commands
 import discord.ext
@@ -26,9 +28,9 @@ embed_help.colour = discord.Colour.dark_purple()
 #embed_help.color = discord.Color.dark_purple()
 embed_help.title = "Lista de comandos"
 embed_help.description = "Para usar qualquer comando basta usar `.<comando>`\n"
-embed_help.description +="**Ações:**\n`bite` `slap` `cry` `highfive` `blush` `lick` `pat` `hug` `cuddle` `nuzzle` `kiss`\n"
-embed_help.description +="**RPG:**\n`roll`\n"
-embed_help.description +="**Staff:**\n`clear` `log` `rolepicker`\n"
+embed_help.description += "**Ações:**\n`bite` `slap` `cry` `highfive` `blush` `lick` `pat` `hug` `cuddle` `nuzzle` `kiss`\n"
+embed_help.description += "**RPG:**\n`roll`\n"
+embed_help.description += "**Staff:**\n`clear` `log` `rolepicker`\n"
 embed_help.set_footer(text="Para informações sobre cada comando use `.help <comando>`")
 ##############EMBED-BITE##############
 embed_bite = discord.Embed()
@@ -36,8 +38,8 @@ embed_bite.colour = discord.Colour.dark_purple()
 embed_bite.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589096897751285761/bite.jpg")
 embed_bite.title = "Bite help"
 embed_bite.description = "`.bite @user` : *Morde um ou mais usuarios*\n"
-embed_bite.description +="Escolhe uma imagem ou um gif aleatório para ser exibido\n\n"
-embed_bite.description +="**Extenções**\n`-img` : Necessariamente escolhe uma imagem\n`-gif` : Necessariamente escolhe um gif"
+embed_bite.description += "Escolhe uma imagem ou um gif aleatório para ser exibido\n\n"
+embed_bite.description += "**Extenções**\n`-img` : Necessariamente escolhe uma imagem\n`-gif` : Necessariamente escolhe um gif"
 embed_bite.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-SLAP##############
 embed_slap = discord.Embed()
@@ -45,7 +47,7 @@ embed_slap.colour = discord.Colour.dark_purple()
 embed_slap.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589144364161302563/slap.jpg")
 embed_slap.title = "Slap help"
 embed_slap.description = "`.slap @user` : *Estapeia um ou mais usuarios*\n"
-embed_slap.description +="Escolhe um gif aleatório para ser exibido\n"
+embed_slap.description += "Escolhe um gif aleatório para ser exibido\n"
 embed_slap.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-CRY##############
 embed_cry = discord.Embed()
@@ -60,7 +62,7 @@ embed_lick.colour = discord.Colour.dark_purple()
 embed_lick.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589151423359352852/lick.jpg")
 embed_lick.title = "Lick help"
 embed_lick.description = "`.lick @user` : *Lambe um ou mais usuarios*\n"
-embed_lick.description +="Escolhe um gif aleatório para ser exibido\n"
+embed_lick.description += "Escolhe um gif aleatório para ser exibido\n"
 embed_lick.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-HIGHFIVE##############
 embed_highfive = discord.Embed()
@@ -68,7 +70,7 @@ embed_highfive.colour = discord.Colour.dark_purple()
 embed_highfive.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589152146646237192/highfive.png")
 embed_highfive.title = "Highfive help"
 embed_highfive.description = "`.highfive @user` : *Highfive um ou mais usuarios*\n"
-embed_highfive.description +="Escolhe uma imagem ou um gif aleatório para ser exibido\n"
+embed_highfive.description += "Escolhe uma imagem ou um gif aleatório para ser exibido\n"
 embed_highfive.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-BLUSH##############
 embed_blush = discord.Embed()
@@ -83,7 +85,7 @@ embed_pat.colour = discord.Colour.dark_purple()
 embed_pat.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589152745462956053/pat.jpg")
 embed_pat.title = "Pat help"
 embed_pat.description = "`.pat @user` : *Acaricia um ou mais usuarios*\n"
-embed_pat.description +="Escolhe uma imagem ou um gif aleatório para ser exibido\n"
+embed_pat.description += "Escolhe uma imagem ou um gif aleatório para ser exibido\n"
 embed_pat.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-HUG##############
 embed_hug = discord.Embed()
@@ -91,8 +93,8 @@ embed_hug.colour = discord.Colour.dark_purple()
 embed_hug.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589110871775641662/hug.jpg")
 embed_hug.title = "Hug help"
 embed_hug.description = "`.hug @user` : *Abraça um ou mais usuarios*\n"
-embed_hug.description +="Escolhe uma imagem ou um gif aleatório para ser exibido\n\n"
-embed_hug.description +="**Extenções**\n`-img` : Necessariamente escolhe uma imagem\n`-gif` : Necessariamente escolhe um gif"
+embed_hug.description += "Escolhe uma imagem ou um gif aleatório para ser exibido\n\n"
+embed_hug.description += "**Extenções**\n`-img` : Necessariamente escolhe uma imagem\n`-gif` : Necessariamente escolhe um gif"
 embed_hug.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-CUDDLE##############
 embed_cuddle = discord.Embed()
@@ -100,8 +102,8 @@ embed_cuddle.colour = discord.Colour.dark_purple()
 embed_cuddle.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589243610789183505/cuddle.jpg")
 embed_cuddle.title = "Cuddle help"
 embed_cuddle.description = "`.cuddle @user` : *Abraça amorosamente um ou mais usuarios*\n"
-embed_cuddle.description +="Escolhe uma imagem ou um gif aleatório para ser exibido\n\n"
-embed_cuddle.description +="**Extenções**\n`-img` : Necessariamente escolhe uma imagem\n`-gif` : Necessariamente escolhe um gif"
+embed_cuddle.description += "Escolhe uma imagem ou um gif aleatório para ser exibido\n\n"
+embed_cuddle.description += "**Extenções**\n`-img` : Necessariamente escolhe uma imagem\n`-gif` : Necessariamente escolhe um gif"
 embed_cuddle.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-NUZZLE##############
 embed_nuzzle = discord.Embed()
@@ -109,7 +111,7 @@ embed_nuzzle.colour = discord.Colour.dark_purple()
 embed_nuzzle.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589250328487133226/nuzzle.jpg")
 embed_nuzzle.title = "Nuzzle help"
 embed_nuzzle.description = "`.nuzzle @user` : *Esfrega o rosto em um ou mais usuarios*\n"
-embed_nuzzle.description +="Escolhe um gif aleatório para ser exibido\n"
+embed_nuzzle.description += "Escolhe um gif aleatório para ser exibido\n"
 embed_nuzzle.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-KISS##############
 embed_kiss = discord.Embed()
@@ -117,8 +119,8 @@ embed_kiss.colour = discord.Colour.dark_purple()
 embed_kiss.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589152146646237192/highfive.png")
 embed_kiss.title = "Kiss help"
 embed_kiss.description = "`.kiss @user` : *Beija um ou mais usuarios*\n"
-embed_kiss.description +="Escolhe uma imagem ou um gif aleatório para ser exibido\n\n"
-embed_kiss.description +="**Extenções**\n`-img` : Necessariamente escolhe uma imagem\n`-gif` : Necessariamente escolhe um gif"
+embed_kiss.description += "Escolhe uma imagem ou um gif aleatório para ser exibido\n\n"
+embed_kiss.description += "**Extenções**\n`-img` : Necessariamente escolhe uma imagem\n`-gif` : Necessariamente escolhe um gif"
 embed_kiss.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-ROLL##############
 embed_roll = discord.Embed()
@@ -126,14 +128,14 @@ embed_roll.colour = discord.Colour.dark_purple()
 embed_roll.set_thumbnail(url="https://cdn.discordapp.com/attachments/592521078597746698/592882908239495170/roll.jpg")
 embed_roll.title = "Roll help"
 embed_roll.description = "`.roll <repetições>* <dado> <buff/nerf>*` : *Joga um `<dado>`*\n"
-embed_roll.description +="Pode-se jogar diversos dados em apenas um comando, basta repetir o parâmetro `<dado>` quantas vezes quiser. "
-embed_roll.description +="Podendo, para cada `<dado>`, especificar o numero de `<repetições>` e/ou seu respectivo `<buff/nerf>`\n"
-embed_roll.description +="Exemplos: `.roll d2` `.roll 2 d6` `.roll d10 4` `.roll d4 -1` `.roll 3 d20 +2` `.roll 2 d4 d6 5 3 d10 *1.2`\n"
-embed_roll.description +="Dica: pode-se escrever `.roll 3x d6 -2, 2x d20 +3` para facilitar o entendimento\n\n"
-embed_roll.description +="**Parâmetros**\n`<dado>` : Um `<dado>` é definido por `dX` onde `X` é um numero inteiro, correspondente a quantidade de lados do dado\n"
-embed_roll.description +="`<repetições>` *__Opcional__: Número de vezes que se pretende lançar o dado. Caso seja omitido será considerado 1\n"
-embed_roll.description +="`<buff/nerf>` *__Opcional__: Caso precise mudar o resultado do dado de alguma maneira, para buffar ou nerfar a ação do jogador, "
-embed_roll.description +="pode usar um `oX` onde `o` é um operador matemático(operadores suportados: [+, -, *, x, /, ^, %]) e `X` um numero real(casas decimais são aceitas). Caso seja omitido será considerado um lançamento normal\n\n"
+embed_roll.description += "Pode-se jogar diversos dados em apenas um comando, basta repetir o parâmetro `<dado>` quantas vezes quiser. "
+embed_roll.description += "Podendo, para cada `<dado>`, especificar o numero de `<repetições>` e/ou seu respectivo `<buff/nerf>`\n"
+embed_roll.description += "Exemplos: `.roll d2` `.roll 2 d6` `.roll d10 4` `.roll d4 -1` `.roll 3 d20 +2` `.roll 2 d4 d6 5 3 d10 *1.2`\n"
+embed_roll.description += "Dica: pode-se escrever `.roll 3x d6 -2, 2x d20 +3` para facilitar o entendimento\n\n"
+embed_roll.description += "**Parâmetros**\n`<dado>` : Um `<dado>` é definido por `dX` onde `X` é um numero inteiro, correspondente a quantidade de lados do dado\n"
+embed_roll.description += "`<repetições>` *__Opcional__: Número de vezes que se pretende lançar o dado. Caso seja omitido será considerado 1\n"
+embed_roll.description += "`<buff/nerf>` *__Opcional__: Caso precise mudar o resultado do dado de alguma maneira, para buffar ou nerfar a ação do jogador, "
+embed_roll.description += "pode usar um `oX` onde `o` é um operador matemático(operadores suportados: [+, -, *, x, /, ^, %]) e `X` um numero real(casas decimais são aceitas). Caso seja omitido será considerado um lançamento normal\n\n"
 #embed_roll.set_footer(text="Pode-se escrever .roll 3x d6, 2x d20 para facilitar o entendimento")
 ##############EMBED-CLEAR##############
 embed_clear = discord.Embed()
@@ -141,7 +143,7 @@ embed_clear.colour = discord.Colour.dark_purple()
 #embed_clear.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589152146646237192/highfive.png")
 embed_clear.title = "Clear help"
 embed_clear.description = "`.clear <qtd>` : *deleta a `<qtd>` de mensagens no canal*\n`cl <qtd>` também pode ser utilizado\n\n"
-embed_clear.description +="**Parâmetros**\n`<qtd>` : Deve ser um _numero inteiro_ correspondente a quantidade de mensagens que se deseja apagar (limite de 100 mensagens por vez)"
+embed_clear.description += "**Parâmetros**\n`<qtd>` : Deve ser um _numero inteiro_ correspondente a quantidade de mensagens que se deseja apagar (limite de 100 mensagens por vez)"
 embed_clear.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador")
 ##############EMBED-LOG##############
 embed_log = discord.Embed()
@@ -149,9 +151,9 @@ embed_log.colour = discord.Colour.dark_purple()
 #embed_log.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589152146646237192/highfive.png")
 embed_log.title = "Log help"
 embed_log.description = "`.log <#canal>` : *define `<#canal>` como o canal de log do servidor*\n"
-embed_log.description +="Caso um canal já tenha sido definido este será atualizado para o novo `<#canal>`\n\n"
-embed_log.description +="**Parâmetros**\n`<#canal>` : Deve ser uma __mensão a um canal textual__ correspondente ao canal que se deseja mandar as mensagens de log\n\n"
-embed_log.description +="**Extenções**\n`-clear` : Não necessita de parâmetros. Remove o canal de log do servidor"
+embed_log.description += "Caso um canal já tenha sido definido este será atualizado para o novo `<#canal>`\n\n"
+embed_log.description += "**Parâmetros**\n`<#canal>` : Deve ser uma __mensão a um canal textual__ correspondente ao canal que se deseja mandar as mensagens de log\n\n"
+embed_log.description += "**Extenções**\n`-clear` : Não necessita de parâmetros. Remove o canal de log do servidor"
 embed_log.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador")
 ##############EMBED-ROLEPICKER##############
 embed_rolepicker = discord.Embed()
@@ -159,11 +161,11 @@ embed_rolepicker.colour = discord.Colour.dark_purple()
 #embed_rolepicker.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589152146646237192/highfive.png")
 embed_rolepicker.title = "Rolepicker help"
 embed_rolepicker.description = "`.rolepicker <#canal>` : *Espera receber um `rolepicker` valido no `<#canal>` especificado*\n"
-embed_rolepicker.description +="Um `rolepicker` é qualquer mensagem que contem uma mesma quantidade de __menções de cargos__ e __emojis__. A ordem dos cargos irá indicar qual é o emoji corresponde e vice-versa\n"
-embed_rolepicker.description +="A mensagem pode conter textos, menções, imagens, etc... desde que a restrição acima seja atingida\n"
-embed_rolepicker.description +="Para **editar** o `rolepicker` basta editar a mensagem, mantendo a quantidade de __menções de cargos__ iguais a de __emojis__\n"
-embed_rolepicker.description +="Para **excluir** o `rolepicker` basta excluir a mensagem\n\n"
-embed_rolepicker.description +="**Parâmetros**\n`<#canal>` : Deve ser uma __mensão a um canal textual__ correspondente ao canal que se deseja mandar a mensagens de log\n\n"
+embed_rolepicker.description += "Um `rolepicker` é qualquer mensagem que contem uma mesma quantidade de __menções de cargos__ e __emojis__. A ordem dos cargos irá indicar qual é o emoji corresponde e vice-versa\n"
+embed_rolepicker.description += "A mensagem pode conter textos, menções, imagens, etc... desde que a restrição acima seja atingida\n"
+embed_rolepicker.description += "Para **editar** o `rolepicker` basta editar a mensagem, mantendo a quantidade de __menções de cargos__ iguais a de __emojis__\n"
+embed_rolepicker.description += "Para **excluir** o `rolepicker` basta excluir a mensagem\n\n"
+embed_rolepicker.description += "**Parâmetros**\n`<#canal>` : Deve ser uma __mensão a um canal textual__ correspondente ao canal que se deseja mandar a mensagens de log\n\n"
 embed_log.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador")
 ######################################
 
@@ -174,38 +176,41 @@ client.activity = activity
 
 @client.event
 async def on_ready():
+    """Log para saber se o bot está on-line"""
     print('We have logged in as {0.user}'.format(client))
-    #await client.get_channel(588893416746647553).send("ready to rock ;3")
 
 @client.event
 async def on_guild_join(guild):
-    if(not gerenciadorDeDados.serverJaRegistrado(guild.id)):
-        gerenciadorDeDados.registrarServer(dados.Server(guild.id))
+    """Registra o novo server em que o bot entrou"""
+    gerenciadorDeDados.registrarServer(dados.Server(guild.id))
 
 @client.event
 async def on_message_delete(message):
+    """Faz o log de mensagens deletadas (Falta fazer suporte para mensagens não textuais)"""
     if message.author == client.user:
          return
 
     logChannelID = gerenciadorDeDados.getLogChannelID(message.guild.id)
-    if(logChannelID != None):
+    if(logChannelID is not None):
         embed = discord.Embed(colour=discord.Colour.dark_purple(), title="Message deleted", description="**At:** <#"+ str(message.channel.id) + ">\n**Author:** <@" + str(message.author.id) + ">\n" + str(message.content))
         await client.get_channel(logChannelID).send(embed=embed)
     return
 
 @client.event
 async def on_message_edit(before, after):
+    """Faz o log de mensagens editadas (Falta fazer suporte para mensagens não textuais)"""
     if before.author == client.user or after.author == client.user:
         return
 
     logChannelID = gerenciadorDeDados.getLogChannelID(before.guild.id)
-    if (logChannelID != None):
+    if (logChannelID is not None):
         embed = discord.Embed(colour=discord.Colour.dark_purple(), title="Message edited", description="**At:** <#"+ str(before.channel.id) + ">\n**Author:** <@" + str(before.author.id) + ">\n\n***Before:*** \n" + str(before.content) + "\n\n***After:*** \n" + str(after.content))
         await client.get_channel(logChannelID).send(embed=embed)
     return
 
 @client.event
 async def on_raw_message_delete(payload):
+    """Remove o `rolepicker` caso esta mensagem seja um"""
     channel = client.get_channel(payload.channel_id)
     if(payload.cached_message is not None):
         message = payload.cached_message
@@ -222,6 +227,7 @@ async def on_raw_message_delete(payload):
 
 @client.event
 async def on_raw_message_edit(payload):
+    """Edita o `rolepicker` caso esta mensagem seja um"""
     channel = client.get_channel(int(payload.data["channel_id"]))
     message = await channel.fetch_message(payload.message_id)
     if(payload.data["guild_id"] is not None):
@@ -235,6 +241,7 @@ async def on_raw_message_edit(payload):
 
 @client.event
 async def on_raw_reaction_add(payload):
+    """Adiciona o cargo correspondente a reação do usuário para o respectivo `rolepicker` caso esta mensagem seja um"""
     if(payload.user_id == client.user.id):
         return
 
@@ -261,6 +268,7 @@ async def on_raw_reaction_add(payload):
 
 @client.event
 async def on_raw_reaction_remove(payload):
+    """Remove o cargo correspondente a reação do usuário para o respectivo `rolepicker` caso esta mensagem seja um"""
     if(payload.user_id == client.user.id):
         return
 
@@ -282,6 +290,7 @@ async def on_raw_reaction_remove(payload):
 
 @client.event
 async def on_message(message):
+    """Trata possiveis comandos"""
     if message.author == client.user:
         return
 
@@ -295,6 +304,7 @@ async def on_message(message):
 @client.command()
 @commands.guild_only()
 async def bite(ctx):
+    """`.bite @user` : Morde um ou mais usuarios"""
     if (len(ctx.message.mentions) == 0):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
@@ -324,6 +334,7 @@ async def bite(ctx):
 @client.command()
 @commands.guild_only()
 async def slap(ctx):
+    """`.slap @user` : Estapeia um ou mais usuarios"""
     if (len(ctx.message.mentions) == 0):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
@@ -342,9 +353,8 @@ async def slap(ctx):
 
 ####################.CRY###########################
 @client.command()
-@commands.guild_only()
 async def cry(ctx):
-
+    """`.cry` : Exibe um gif de choro aleatorio"""
     file = discord.File("cry/gif/" + str(random.choice(os.listdir("cry/gif/"))), filename="cry.gif")
 
     await ctx.send(file=file)
@@ -354,6 +364,7 @@ async def cry(ctx):
 @client.command()
 @commands.guild_only()
 async def highfive(ctx):
+    """`.highfive @user` : Highfive um ou mais usuarios"""
     if (len(ctx.message.mentions) == 0):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
@@ -373,8 +384,8 @@ async def highfive(ctx):
 
 ####################.BLUSH###########################
 @client.command()
-@commands.guild_only()
 async def blush(ctx):
+    """`.blush` : Aleatoriamente exibe um gif ou imagem de alguem corando"""
     if ("-img" in ctx.message.content):
         file = discord.File("blush/img/" + str(random.choice(os.listdir("blush/img/"))), filename="blush.jpg")
     elif ("-gif" in ctx.message.content):
@@ -395,6 +406,7 @@ async def blush(ctx):
 @client.command()
 @commands.guild_only()
 async def lick(ctx):
+    """`.pat @user` : Acaricia um ou mais usuarios"""
     if (len(ctx.message.mentions) == 0):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
@@ -414,6 +426,7 @@ async def lick(ctx):
 @client.command()
 @commands.guild_only()
 async def pat(ctx):
+    """`.pat @user` : Acaricia um ou mais usuarios"""
     if (len(ctx.message.mentions) == 0):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
@@ -434,6 +447,7 @@ async def pat(ctx):
 @client.command()
 @commands.guild_only()
 async def hug(ctx):
+    """`.hug @user` : Abraça um ou mais usuarios"""
     if(len(ctx.message.mentions) == 0):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
@@ -462,6 +476,7 @@ async def hug(ctx):
 @client.command()
 @commands.guild_only()
 async def cuddle(ctx):
+    """`.cuddle @user` : Abraça amorosamente um ou mais usuarios"""
     if (len(ctx.message.mentions) == 0):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
@@ -491,6 +506,7 @@ async def cuddle(ctx):
 @client.command()
 @commands.guild_only()
 async def nuzzle(ctx):
+    """`.nuzzle @user` : Esfrega o rosto em um ou mais usuarios"""
     if (len(ctx.message.mentions) == 0):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
@@ -510,6 +526,7 @@ async def nuzzle(ctx):
 @client.command()
 @commands.guild_only()
 async def kiss(ctx):
+    """`.kiss @user` : Beija um ou mais usuarios"""
     if (len(ctx.message.mentions) == 0):
         await ctx.send("Por favor, mencione, pelo menos, um usuario")
         return
@@ -538,10 +555,10 @@ async def kiss(ctx):
 ####################.ROLL###########################
 @client.command()
 async def roll(ctx):
-
+    """`.roll <repetições>* <dado> <buff/nerf>*` : Joga um `<dado>`"""
     content = ctx.message.content
     indice = -1
-    dados = []
+    faceDados = []
     vezes = []
     multiplicadores = []
 
@@ -553,14 +570,14 @@ async def roll(ctx):
         if(content[numero.start()-1] == "d"):
             if(indice == -1): #primeira inserção
                 indice += 1
-                dados.append(math.trunc(float(numero[0].replace(",", "."))))
+                faceDados.append(math.trunc(float(numero[0].replace(",", "."))))
                 vezes.append(1)
                 multiplicadores.append("+0")
-            elif(dados[indice] == None): #bloco já setado
-                dados[indice] = math.trunc(float(numero[0].replace(",", ".")))
+            elif(faceDados[indice] is None): #bloco já setado
+                faceDados[indice] = math.trunc(float(numero[0].replace(",", ".")))
             else: #novo bloco
                 indice += 1
-                dados.append(math.trunc(float(numero[0].replace(",", "."))))
+                faceDados.append(math.trunc(float(numero[0].replace(",", "."))))
                 vezes.append(1)
                 multiplicadores.append("+0")
 
@@ -571,28 +588,28 @@ async def roll(ctx):
 
             if (indice == -1):  # primeira inserção
                 indice += 1
-                dados.append(None)
+                faceDados.append(None)
                 vezes.append(1)
                 multiplicadores.append(multiplicador)
             elif (multiplicadores[indice] == "+0"):  # bloco já setado
                 multiplicadores[indice] = multiplicador
             else:  # novo bloco
                 indice += 1
-                dados.append(None)
+                faceDados.append(None)
                 vezes.append(1)
                 multiplicadores.append(multiplicador)
 
         else:
             if (indice == -1):  # primeira inserção
                 indice += 1
-                dados.append(None)
+                faceDados.append(None)
                 vezes.append(math.trunc(float(numero[0].replace(",", "."))))
                 multiplicadores.append("+0")
             elif (vezes[indice] == 1):  # bloco já setado
                 vezes[indice] = math.trunc(float(numero[0].replace(",", ".")))
             else:  # novo bloco
                 indice += 1
-                dados.append(None)
+                faceDados.append(None)
                 vezes.append(math.trunc(float(numero[0].replace(",", "."))))
                 multiplicadores.append("+0")
 
@@ -600,8 +617,8 @@ async def roll(ctx):
 
     ret = "Resultados para " + ctx.author.mention + ":\n"
 
-    for i in range(len(dados)):
-        d = dados[i]
+    for i in range(len(faceDados)):
+        d = faceDados[i]
         soma = 0
         if(multiplicadores[i] in ["+0", "-0", "*1", "x1", "/1", "^1"]):
             ret += "**d" + str(d) + "** ["
@@ -637,6 +654,7 @@ async def roll(ctx):
 ####################.FICHA###########################
 @client.command()
 async def ficha(ctx):
+    """Cria nova ficha de personagem para o respectivo usuario"""
     pass
 
 ####################.CLEAR###########################
@@ -644,12 +662,15 @@ async def ficha(ctx):
 @commands.guild_only()
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, qtd: int):
+    """`.clear <qtd>` : deleta a `<qtd>` de mensagens no canal
+    `cl <qtd>` também pode ser utilizado"""
     if(qtd > 100):
         qtd = 100
     await ctx.message.channel.delete_messages(await ctx.message.channel.history(limit=qtd+1, oldest_first=False).flatten())
 
 @clear.error
 async def clear_error(ctx, error):
+    """Trata erros de permissão e parâmetros do `.clear`"""
     if isinstance(error, discord.ext.commands.errors.MissingPermissions):
         await ctx.send("Desculpe-me " + ctx.author.mention + " você não tem permissão para isso")
     elif isinstance(error, discord.ext.commands.errors.MissingRequiredArgument):
@@ -664,6 +685,7 @@ async def clear_error(ctx, error):
 @commands.guild_only()
 @commands.has_permissions(administrator=True)
 async def log(ctx):
+    """`.log <#canal>` : define `<#canal>` como o canal de log do servidor"""
     if ("-clear" in ctx.message.content):
         server = gerenciadorDeDados.getServer(ctx.message.guild.id)
         gerenciadorDeDados.updateServer(server)
@@ -679,6 +701,7 @@ async def log(ctx):
 
 @log.error
 async def log_error(ctx, error):
+    """Trata erros de permissão do `.log`"""
     if isinstance(error, discord.ext.commands.errors.MissingPermissions):
         await ctx.send("Desculpe-me " + ctx.author.mention + " você não tem permissão para isso")
 
@@ -686,7 +709,8 @@ async def log_error(ctx, error):
 @client.command()
 @commands.guild_only()
 @commands.has_permissions(administrator=True)
-async def rolepicker(ctx, ):
+async def rolepicker(ctx):
+    """`.rolepicker <#canal>` : Espera receber um `rolepicker` valido no `<#canal>` especificado"""
     if(not len(ctx.message.channel_mentions) == 1):
         await ctx.send("Mencione o canal em que pretende criar o rolepicker.\nCaso tenha alguma duvida consulte `.help rolepicker` e tente novamente.")
         return
@@ -717,6 +741,7 @@ async def rolepicker(ctx, ):
 
 @rolepicker.error
 async def rolepicker_error(ctx, error):
+    """Trata erros de permissão do `.rolepicker`"""
     if isinstance(error, discord.ext.commands.errors.MissingPermissions):
         await ctx.send("Desculpe-me " + ctx.author.mention + " você não tem permissão para isso")
     else:
@@ -725,6 +750,7 @@ async def rolepicker_error(ctx, error):
 ####################.HELP###########################
 @client.command()
 async def help(ctx):
+    """Exibe a lista de comandos e os embeds de ajuda de cada função"""
     if ("bite" in ctx.message.content):
         await ctx.send(embed=embed_bite)
         return
@@ -790,3 +816,4 @@ async def help(ctx):
 
 
 client.run(os.environ["TOKEN"])
+client.run("NTg4ODYyNzAzNDYwOTQxODU0.XRAhzA.5DW5FDM1EyOuU3NvjCFMt6znkWE")

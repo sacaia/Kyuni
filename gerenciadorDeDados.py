@@ -4,6 +4,7 @@ import dados
 import re
 
 def serverJaRegistrado(serverID):
+    """Retorna True caso o server esteja cadastrado e False caso contrário"""
     file = open("data/servers.txt", "r")
     for linha in file:
         l = linha[:-1]
@@ -19,6 +20,7 @@ def serverJaRegistrado(serverID):
     return False
 
 def getServer(serverID):
+    """Retorna um objeto `Server` com as informações correspondentes ao id fornecido"""
     file = open("data/servers.txt", "r")
     for linha in file:
         l = linha[:-1]
@@ -34,11 +36,14 @@ def getServer(serverID):
     return None
 
 def registrarServer(server):
-    file = open("data/servers.txt", "a")
-    file.write(json.dumps(server.__dict__) + "\n")
-    file.close()
+    """Adiciona um novo server, se já não existente"""
+    if (not serverJaRegistrado(server.serverID)):
+        file = open("data/servers.txt", "a")
+        file.write(json.dumps(server.__dict__) + "\n")
+        file.close()
 
 def updateServer(server):
+    """Atualiza todos os todos os campos de um server já registrado"""
     fileR = open("data/servers.txt", "r")
     linhas = fileR.readlines()
     novasLinhas = []
@@ -57,6 +62,7 @@ def updateServer(server):
     fileW.close()
 
 def getLogChannelID(serverID):
+    """Retorna somente o id do canal de log do server fornecido"""
     file = open("data/servers.txt", "r")
     linhas = file.readlines()
     for linha in linhas:
@@ -68,16 +74,18 @@ def getLogChannelID(serverID):
     file.close()
     return None
 
-def hasEmoji(str):
+def hasEmoji(string):
+    """Verifica se existe um emoji em um string (não considera emojis customizados)"""
     emojis = dados.EMOJIS()
 
     for emoji in emojis:
-        if(emoji in str):
+        if(emoji in string):
             return True
 
     return False
 
 def getEmojisFromMessage(message):
+    """Retorna uma lista de duplicas contendo o indice de onde o emoji foi encontrado seguido do seu valor"""
     unicodeEmojis = []
     customEmojis = []
 
@@ -102,6 +110,7 @@ def getEmojisFromMessage(message):
     return unicodeEmojis + customEmojis
 
 def getRolesFromMessage(message):
+    """Retorna uma lista de duplicas contendo o indice de onde a `role` foi encontrada seguida de seu valor"""
     roles = []
 
     for role in re.findall(r'<@&\d*>', message.content):
@@ -110,6 +119,7 @@ def getRolesFromMessage(message):
     return roles
 
 def getCorrespondingRole(message, emoji):
+    """Retorna a `role` correspondente ao emoji especificado para aquela mensagem"""
     emojis = getEmojisFromMessage(message)
     roles = getRolesFromMessage(message)
     i=0
