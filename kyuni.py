@@ -9,6 +9,7 @@ import gerenciadorDeDados
 import random
 import os
 import re
+import math
 import json
 
 ##############ACTIVITY##############
@@ -124,12 +125,15 @@ embed_roll = discord.Embed()
 embed_roll.colour = discord.Colour.dark_purple()
 embed_roll.set_thumbnail(url="https://cdn.discordapp.com/attachments/592521078597746698/592882908239495170/roll.jpg")
 embed_roll.title = "Roll help"
-embed_roll.description = "`.roll <repetições>* <dado>` ou `.roll <dado> <repetições>*` : *Joga um `<dado>`*\n"
-embed_roll.description +="Pode-se jogar diversos dados em apenas um comando, basta repetir os parâmetros `<dado>` e `<repetições>` quantas vezes quiser\n"
-embed_roll.description +="Exemplos: `.roll d2` `.roll 2 d6` `.roll d10 4` `.roll 2 d4 d6 5 3 d10`\n"
-embed_roll.description +="Dica: pode-se escrever `.roll 3x d6, 2x d20` para facilitar o entendimento\n\n"
+embed_roll.description = "`.roll <repetições>* <dado> <buff/nerf>*` : *Joga um `<dado>`*\n"
+embed_roll.description +="Pode-se jogar diversos dados em apenas um comando, basta repetir o parâmetro `<dado>` quantas vezes quiser. "
+embed_roll.description +="Podendo, para cada `<dado>`, especificar o numero de `<repetições>` e/ou seu respectivo `<buff/nerf>`\n"
+embed_roll.description +="Exemplos: `.roll d2` `.roll 2 d6` `.roll d10 4` `.roll d4 -1` `.roll 3 d20 +2` `.roll 2 d4 d6 5 3 d10 *1.2`\n"
+embed_roll.description +="Dica: pode-se escrever `.roll 3x d6 -2, 2x d20 +3` para facilitar o entendimento\n\n"
 embed_roll.description +="**Parâmetros**\n`<dado>` : Um `<dado>` é definido por `dX` onde `X` é um numero inteiro, correspondente a quantidade de lados do dado\n"
-embed_roll.description +="`<repetições>` *__Opcional__: Número de vezes que se pretende lançar o dado. Caso seja omitido será considerado 1\n\n"
+embed_roll.description +="`<repetições>` *__Opcional__: Número de vezes que se pretende lançar o dado. Caso seja omitido será considerado 1\n"
+embed_roll.description +="`<buff/nerf>` *__Opcional__: Caso precise mudar o resultado do dado de alguma maneira, para buffar ou nerfar a ação do jogador, "
+embed_roll.description +="pode usar um `oX` onde `o` é um operador matemático(operadores suportados: [+, -, *, x, /, ^, %]) e `X` um numero real(casas decimais são aceitas). Caso seja omitido será considerado um lançamento normal\n\n"
 #embed_roll.set_footer(text="Pode-se escrever .roll 3x d6, 2x d20 para facilitar o entendimento")
 ##############EMBED-CLEAR##############
 embed_clear = discord.Embed()
@@ -306,7 +310,7 @@ async def bite(ctx):
         else:
             file = discord.File("bite/img/" + str(random.choice(os.listdir("bite/img/"))), filename="bite.jpg")
 
-    ret = "**" + ctx.message.author.display_name + "** mordeu "
+    ret = "**" + ctx.author.display_name + "** mordeu "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
@@ -326,7 +330,7 @@ async def slap(ctx):
 
     file = discord.File("slap/gif/" + str(random.choice(os.listdir("slap/gif/"))), filename="slap.gif")
 
-    ret = "**" + ctx.message.author.display_name + "** deu um tapa em "
+    ret = "**" + ctx.author.display_name + "** deu um tapa em "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
@@ -356,7 +360,7 @@ async def highfive(ctx):
 
     file = discord.File("highfive/gif/" + str(random.choice(os.listdir("highfive/gif/"))), filename="highfive.gif")
 
-    ret = "**" + ctx.message.author.display_name + "** highfive "
+    ret = "**" + ctx.author.display_name + "** highfive "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
@@ -382,7 +386,7 @@ async def blush(ctx):
         else:
             file = discord.File("blush/img/" + str(random.choice(os.listdir("blush/img/"))), filename="blush.jpg")
 
-    ret = "**" + ctx.message.author.display_name + "** corou"
+    ret = "**" + ctx.author.display_name + "** corou"
 
     await ctx.send(ret, file=file)
     return
@@ -397,7 +401,7 @@ async def lick(ctx):
 
     file = discord.File("lick/gif/" + str(random.choice(os.listdir("lick/gif/"))), filename="lick.gif")
 
-    ret = "**" + ctx.message.author.display_name + "** lambeu "
+    ret = "**" + ctx.author.display_name + "** lambeu "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
@@ -416,7 +420,7 @@ async def pat(ctx):
 
     file = discord.File("pat/gif/" + str(random.choice(os.listdir("pat/gif/"))), filename="pat.gif")
 
-    ret = "**" + ctx.message.author.display_name + "** acariciou "
+    ret = "**" + ctx.author.display_name + "** acariciou "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
@@ -445,7 +449,7 @@ async def hug(ctx):
         else:
             file = discord.File("hug/img/" + str(random.choice(os.listdir("hug/img/"))), filename="hug.jpg")
 
-    ret = "**" + ctx.message.author.display_name + "** abraçou "
+    ret = "**" + ctx.author.display_name + "** abraçou "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
@@ -473,7 +477,7 @@ async def cuddle(ctx):
         else:
             file = discord.File("cuddle/img/" + str(random.choice(os.listdir("cuddle/img/"))), filename="cuddle.jpg")
 
-    ret = "**" + ctx.message.author.display_name + "** abraçou "
+    ret = "**" + ctx.author.display_name + "** abraçou "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
@@ -493,7 +497,7 @@ async def nuzzle(ctx):
 
     file = discord.File("nuzzle/gif/" + str(random.choice(os.listdir("nuzzle/gif/"))), filename="nuzzle.gif")
 
-    ret = "**" + ctx.message.author.display_name + "** se esfregou em "
+    ret = "**" + ctx.author.display_name + "** se esfregou em "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
@@ -521,7 +525,7 @@ async def kiss(ctx):
         else:
             file = discord.File("kiss/img/" + str(random.choice(os.listdir("kiss/img/"))), filename="kiss.jpg")
 
-    ret = "**" + ctx.message.author.display_name + "** beijou "
+    ret = "**" + ctx.author.display_name + "** beijou "
 
     for mention in ctx.message.mentions:
         ret = ret + "**" + mention.display_name + "**, "
@@ -536,46 +540,96 @@ async def kiss(ctx):
 async def roll(ctx):
 
     content = ctx.message.content
-    dados = re.findall(r"d\d+", content)
-    if (not dados):
-        await ctx.send("Especifique pelo menos 1 dado!\nExemplo: `.roll d6`")
-        return
+    indice = -1
+    dados = []
+    vezes = []
+    multiplicadores = []
 
-    for d in dados:
-        content = content.replace(d, "")
+    while True:
+        numero = re.search(r"\d+[.\|,]?\d*", content)
+        if(numero is None):
+            break
 
-    qtds  = re.findall(r"\d+", content)
-    if(qtds and len(qtds) != len(dados)):
-        await ctx.send("Especifique todas as quantidades ou nenhuma quantidade de dados")
-        return
+        if(content[numero.start()-1] == "d"):
+            if(indice == -1): #primeira inserção
+                indice += 1
+                dados.append(math.trunc(float(numero[0].replace(",", "."))))
+                vezes.append(1)
+                multiplicadores.append("+0")
+            elif(dados[indice] == None): #bloco já setado
+                dados[indice] = math.trunc(float(numero[0].replace(",", ".")))
+            else: #novo bloco
+                indice += 1
+                dados.append(math.trunc(float(numero[0].replace(",", "."))))
+                vezes.append(1)
+                multiplicadores.append("+0")
 
-    if(not qtds):
-        for i in range(len(dados)):
-            qtds.append("1")
+        elif(content[numero.start()-1] in ["+", "-", "*", "/", "x", "^", "%"]):
+            multiplicador = content[numero.start()-1:numero.end()].replace(",", ".")
+            if(multiplicador.endswith(".")):
+                multiplicador = multiplicador[:-1]
 
-    for i in range(len(dados)):
-        dados[i] = dados[i][1:]
+            if (indice == -1):  # primeira inserção
+                indice += 1
+                dados.append(None)
+                vezes.append(1)
+                multiplicadores.append(multiplicador)
+            elif (multiplicadores[indice] == "+0"):  # bloco já setado
+                multiplicadores[indice] = multiplicador
+            else:  # novo bloco
+                indice += 1
+                dados.append(None)
+                vezes.append(1)
+                multiplicadores.append(multiplicador)
 
-    if(len(dados) == 1 and int(qtds[0]) < 10):
-        ret = ctx.author.mention + " tirou: "
-        for i in range(int(qtds[0])):
-            ret += str((random.randint(0, int(dados[0]) * 10) % int(dados[0])) + 1) + ", "
-        ret = ret[:-2]
-        await ctx.send(ret)
-        return
+        else:
+            if (indice == -1):  # primeira inserção
+                indice += 1
+                dados.append(None)
+                vezes.append(math.trunc(float(numero[0].replace(",", "."))))
+                multiplicadores.append("+0")
+            elif (vezes[indice] == 1):  # bloco já setado
+                vezes[indice] = math.trunc(float(numero[0].replace(",", ".")))
+            else:  # novo bloco
+                indice += 1
+                dados.append(None)
+                vezes.append(math.trunc(float(numero[0].replace(",", "."))))
+                multiplicadores.append("+0")
+
+        content = content[numero.end():]
 
     ret = "Resultados para " + ctx.author.mention + ":\n"
 
     for i in range(len(dados)):
         d = dados[i]
         soma = 0
-        ret += "**d" + d + "** ["
-        for j in range(int(qtds[i])):
-            valor = (random.randint(0, int(d) * 10) % int(d)) + 1
+        if(multiplicadores[i] in ["+0", "-0", "*1", "x1", "/1", "^1"]):
+            ret += "**d" + str(d) + "** ["
+        else:
+            ret += "**d" + str(d) + "** " + multiplicadores[i] + " ["
+        for j in range(vezes[i]):
+            if(d == 0):
+                valor = 0
+            else:
+                valor = (random.randint(0, d * 10) % d) + 1
+
+            if   (multiplicadores[i].startswith("+")):
+                valor = round(float(valor) + float(multiplicadores[i][1:]))
+            elif (multiplicadores[i].startswith("-")):
+                valor = round(float(valor) - float(multiplicadores[i][1:]))
+            elif (multiplicadores[i].startswith("*") or multiplicadores[i].startswith("x")):
+                valor = round(float(valor) * float(multiplicadores[i][1:]))
+            elif (multiplicadores[i].startswith("/")):
+                valor = round(float(valor) / float(multiplicadores[i][1:]))
+            elif (multiplicadores[i].startswith("^")):
+                valor = round(float(valor) ** float(multiplicadores[i][1:]))
+            elif (multiplicadores[i].startswith("%")):
+                valor = round(float(valor) % float(multiplicadores[i][1:]))
+
             soma += valor
             ret += str(valor) + ", "
         ret = ret[:-2] + "]\n"
-        if(int(qtds[i]) != 1):
+        if(vezes[i] != 1):
             ret += "Total: " + str(soma) + "\n"
 
     await ctx.send(ret)
@@ -597,11 +651,11 @@ async def clear(ctx, qtd: int):
 @clear.error
 async def clear_error(ctx, error):
     if isinstance(error, discord.ext.commands.errors.MissingPermissions):
-        await ctx.send("Desculpe-me <@" + str(ctx.message.author.id) + "> você não tem permissão para isso")
+        await ctx.send("Desculpe-me " + ctx.author.mention + " você não tem permissão para isso")
     elif isinstance(error, discord.ext.commands.errors.MissingRequiredArgument):
-        await ctx.send("<@" + str(ctx.message.author.id) + ">, especifique quantas mensagens deseja limpar")
+        await ctx.send("" + ctx.author.mention + ", especifique quantas mensagens deseja limpar")
     elif isinstance(error, discord.ext.commands.errors.BadArgument):
-        await ctx.send("<@" + str(ctx.message.author.id) + ">, quantidade de mensagens invalida")
+        await ctx.send("" + ctx.author.mention + ", quantidade de mensagens invalida")
     else:
         print(error)
 
@@ -626,7 +680,7 @@ async def log(ctx):
 @log.error
 async def log_error(ctx, error):
     if isinstance(error, discord.ext.commands.errors.MissingPermissions):
-        await ctx.send("Desculpe-me <@" + str(ctx.message.author.id) + "> você não tem permissão para isso")
+        await ctx.send("Desculpe-me " + ctx.author.mention + " você não tem permissão para isso")
 
 ####################.ROLEPICKER###########################
 @client.command()
@@ -638,17 +692,17 @@ async def rolepicker(ctx, ):
         return
 
     def check(m):
-        return m.channel == ctx.message.channel_mentions[0] and m.author == ctx.message.author
+        return m.channel == ctx.message.channel_mentions[0] and m.author == ctx.author
     try:
-        await ctx.send("<@" + str(ctx.message.author.id) + ">, você tem 10 minutos para criar o rolepicker em: <#" + str(ctx.message.channel_mentions[0].id) + ">")
+        await ctx.send("" + ctx.author.mention + ", você tem 10 minutos para criar o rolepicker em: <#" + str(ctx.message.channel_mentions[0].id) + ">")
         msg = await client.wait_for('message',timeout=600.0, check=check)
     except asyncio.TimeoutError:
         await ctx.send("tempo esgotado")
     else:
         if not(len(msg.role_mentions) > 0 and (len(re.findall(r'<:\w*:\d*>', msg.content)) > 0 or gerenciadorDeDados.hasEmoji(msg.content))):
-            await ctx.send("Desculpe-me, <@" + str(ctx.message.author.id) + ">, não pude criar o rolepicker.\nCaso tenha alguma duvida consulte `.help rolepicker` e tente novamente.")
+            await ctx.send("Desculpe-me, " + ctx.author.mention + ", não pude criar o rolepicker.\nCaso tenha alguma duvida consulte `.help rolepicker` e tente novamente.")
         elif(len(gerenciadorDeDados.getRolesFromMessage(msg)) != len(gerenciadorDeDados.getEmojisFromMessage(msg))):
-            await ctx.send(ctx.message.author.mention + ", a quantidade de cargos e emojis tem de ser igual.\nCaso tenha alguma duvida consulte `.help rolepicker` e tente novamente.")
+            await ctx.send(ctx.author.mention + ", a quantidade de cargos e emojis tem de ser igual.\nCaso tenha alguma duvida consulte `.help rolepicker` e tente novamente.")
         else:
             server = gerenciadorDeDados.getServer(ctx.guild.id)
             server.addRolepicker(msg.id)
@@ -664,7 +718,7 @@ async def rolepicker(ctx, ):
 @rolepicker.error
 async def rolepicker_error(ctx, error):
     if isinstance(error, discord.ext.commands.errors.MissingPermissions):
-        await ctx.send("Desculpe-me <@" + str(ctx.message.author.id) + "> você não tem permissão para isso")
+        await ctx.send("Desculpe-me " + ctx.author.mention + " você não tem permissão para isso")
     else:
         print(error)
 
