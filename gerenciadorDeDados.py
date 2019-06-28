@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+"""Created by: Sacaia"""
 import discord
 import json
 import dados
@@ -43,7 +45,7 @@ def registrarServer(server):
         file.close()
 
 def updateServer(server):
-    """Atualiza todos os todos os campos de um server já registrado"""
+    """Atualiza todos os campos de um server já registrado"""
     fileR = open("data/servers.txt", "r")
     linhas = fileR.readlines()
     novasLinhas = []
@@ -136,3 +138,78 @@ def getCorrespondingRole(message, emoji):
     for role in message.role_mentions:
         if(roles[i][1] == role.mention):
             return role
+
+def usuarioJaRegistrado(userID):
+    """Verifica se a ficha ja esta registrada no arquivo de fichas"""
+    file = open("data/usuarios.txt", "r")
+    for linha in file:
+        l = linha[:-1]
+        try:
+            usuario = json.loads(l)
+            if (usuario["userID"] == userID):
+                file.close()
+                return True
+        except:
+            pass
+
+    file.close()
+    return False
+
+def fichaJaRegistrada(userID, nomeFicha):
+    """Verifica se a ficha ja esta registrada no arquivo de fichas"""
+    file = open("data/usuarios.txt", "r")
+    for linha in file:
+        l = linha[:-1]
+        usuario = json.loads(l)
+        if (usuario["userID"] == userID):
+            file.close()
+            return dados.Usuario(usuario["userID"], usuario["fichas"]).existeFicha(nomeFicha)
+
+    file.close()
+    return False
+
+def getUsuario(userID):
+    """Retorna um objeto `Usuario` com as informações correspondentes ao id fornecido"""
+    file = open("data/usuarios.txt", "r")
+    for linha in file:
+        l = linha[:-1]
+        try:
+            usuario = json.loads(l)
+            if (usuario["userID"] == userID):
+                file.close()
+                return dados.Usuario(usuario["userID"], usuario["fichas"])
+        except:
+            pass
+
+    file.close()
+    return None
+
+def updateUsuario(usuario):
+    """Atualiza todos os campos de um usuario já registrado"""
+    fileR = open("data/usuarios.txt", "r")
+    linhas = fileR.readlines()
+    novasLinhas = []
+    for linha in linhas:
+        l = linha[:-1]
+        usu = json.loads(l)
+        if (usu["userID"] == usuario.userID):
+            if(not usuario.fichas):
+                usu["fichas"] = None
+            else:
+                for i in range(len(usuario.fichas)):
+                    usuario.fichas[i] = usuario.fichas[i].__dict__
+                usu["fichas"] = usuario.fichas
+            linha = json.dumps(usu) + "\n"
+        novasLinhas.append(linha)
+    fileR.close()
+
+    fileW = open("data/usuarios.txt", "w")
+    fileW.writelines(novasLinhas)
+    fileW.close()
+
+def registrarUsuario(usuario):
+    """Adiciona um novo usuario, se já não existente"""
+    if (not usuarioJaRegistrado(usuario.userID)):
+        file = open("data/usuarios.txt", "a")
+        file.write(json.dumps(usuario.__dict__) + "\n")
+        file.close()
