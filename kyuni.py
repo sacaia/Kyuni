@@ -12,7 +12,6 @@ import random
 import os
 import re
 import math
-import json
 
 ##############ACTIVITY##############
 activity = discord.Activity()
@@ -30,6 +29,7 @@ embed_help.title = "Lista de comandos"
 embed_help.description = "Para usar qualquer comando basta usar `.<comando>`\n"
 embed_help.description += "**Ações:**\n`bite` `slap` `cry` `highfive` `blush` `lick` `pat` `hug` `cuddle` `nuzzle` `kiss`\n"
 embed_help.description += "**RPG:**\n`roll` `ficha` `novaficha` `editficha` `delficha`\n"
+embed_help.description += "**Outros:**\n`ship` `votação`\n"
 embed_help.description += "**Staff:**\n`clear` `log` `rolepicker` `modrole`\n"
 embed_help.set_footer(text="Para informações sobre cada comando use `.help <comando>`")
 ##############EMBED-BITE##############
@@ -175,7 +175,16 @@ embed_ficha.description = "`.ficha @user* <nome>*` : *lista as fichas de um usua
 embed_ficha.description += "Dependendo dos parâmetros fornecidos exibe a lista de fichas de um usuario(somente o parâmetro `@user`) ou uma ficha específica(ambos os parâmetros)\n\n"
 embed_ficha.description += "**Parâmetros**\n`@user` *__Opcional__: O usuário que pretende consultar. Caso seja omitido será considerado você mesmo\n"
 embed_ficha.description += "`<nome>` *__Opcional__: Nome da ficha que pretende consultar\n"
-embed_roll.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
+embed_ficha.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
+##############EMBED-SHIP##############
+embed_ship = discord.Embed()
+embed_ship.colour = discord.Colour.dark_purple()
+#embed_ship.set_thumbnail(url="https://cdn.discordapp.com/attachments/592521078597746698/592882908239495170/roll.jpg")
+embed_ship.title = "Ship help"
+embed_ship.description = "`.ship @user*` : *mistura os nomes e exibe a porcentagem do ship dar certo*\n"
+embed_ship.description += "Mistura os nomes de todos os membros mencionados(na ordem) e calcula a porcentagem do ship dar certo\n\n"
+embed_ship.description += "**Parâmetros**\n`@user` *__Mais de um__: Lista de menções a outros usuarios\n"
+embed_ship.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-CLEAR##############
 embed_clear = discord.Embed()
 embed_clear.colour = discord.Colour.dark_purple()
@@ -395,11 +404,16 @@ async def on_message(message):
     if (message.content.startswith(client.command_prefix + "delficha")):
         i = re.search("delficha", message.content).end()
         message.content = message.content[:i] + contentOriginal[i:]
+    if (message.content.startswith(client.command_prefix + "votação")):
+        i = re.search("votação", message.content).end()
+        message.content = message.content[:i] + contentOriginal[i:]
 
     if (message.content.startswith(client.command_prefix + "cl")):
         message.content = message.content.replace(client.command_prefix + "cl", client.command_prefix + "clear", 1)
     if (message.content.startswith(client.command_prefix + "fichas")):
         message.content = message.content.replace(client.command_prefix + "fichas", client.command_prefix + "ficha", 1)
+    if (message.content.startswith(client.command_prefix + "votação")):
+        message.content = message.content.replace(client.command_prefix + "votação", client.command_prefix + "votacao", 1)
 
     await client.process_commands(message)
 
@@ -919,6 +933,52 @@ async def ficha(ctx):
             embedFicha.colour = ctx.author.color
         await ctx.send(embed=embedFicha)
 
+####################.SHIP###########################
+@client.command()
+@commands.guild_only()
+async def ship(ctx):
+    """`.ship @user*` : mistura os nomes e exibe a porcentagem do ship dar certo"""
+    if (len(ctx.message.mentions) < 2):
+        await ctx.send("Preciso de pelo menos duas pessoas para shippar")
+        return
+
+    numero = 0
+    nome = "❤ **"
+    qtd = len(ctx.message.mentions)
+    i = 0
+    for member in gerenciadorDeDados.getMentionsFromMessage(ctx.message):
+        parcela = math.ceil(len(member.display_name) / qtd)
+        nome += member.display_name[parcela * i:parcela * (i + 1)]
+        numero += member.id
+        i += 1
+
+    nome += "** ❤"
+    porcentagem = (numero % 100) + 1
+    content = nome + "\n\n" + str(porcentagem) + "% `"
+
+    porcentagemExibivel = math.ceil(porcentagem / 4)
+    for i in range(porcentagemExibivel):
+        content += "█"
+
+    for i in range(25 - porcentagemExibivel):
+        content += "_"
+
+    content += "`\n\n"
+
+    if(porcentagem < 20):
+        content += "É uma pena 😔"
+    elif(porcentagem <51):
+        content += "Talvez n seja uma boa ideia 😕"
+    elif(porcentagem < 71):
+        content += "Tem futuro 😘"
+    elif(porcentagem < 91):
+        content += "Porque ainda n estão ficando?! 💞"
+    else:
+        content += "😍 Que casal perfeitoo! 💕💖💗"
+
+    embedShip = discord.Embed(description=content)
+    await ctx.send(embed=embedShip)
+
 ####################.CLEAR###########################
 @client.command()
 @commands.guild_only()
@@ -1016,7 +1076,7 @@ async def rolepicker_error(ctx, error):
 @commands.guild_only()
 @ehDono()
 async def modrole(ctx):
-    """"""
+    """`.modrole @role` : define `@role` como o cargo de mod do servidor"""
     if ("-clear" in ctx.message.content):
         server = gerenciadorDeDados.getServer(ctx.message.guild.id)
         server.setModRoleID(None)
@@ -1037,7 +1097,6 @@ async def modrole_error(ctx, error):
     """Trata erros de permissão do `.modrole`"""
     if isinstance(error, discord.ext.commands.errors.CheckFailure):
         await ctx.send("Desculpe-me " + ctx.author.mention + " somente o dono do server pode usar este comando")
-
 
 ####################.HELP###########################
 @client.command()
@@ -1087,6 +1146,10 @@ async def help(ctx):
         await ctx.send(embed=embed_kiss)
         return
 
+    elif ("ship" in ctx.message.content):
+        await ctx.send(embed=embed_ship)
+        return
+
     elif ("clear" in ctx.message.content):
         await ctx.send(embed=embed_clear)
         return
@@ -1125,6 +1188,5 @@ async def help(ctx):
 
     await ctx.send(embed=embed_help)
     return
-
 
 client.run(os.environ["TOKEN"])

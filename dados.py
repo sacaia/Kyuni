@@ -173,4 +173,3 @@ class Ficha:
     def getImgURL(self):
         """Getter do imgURL"""
         return self.imgURL
-

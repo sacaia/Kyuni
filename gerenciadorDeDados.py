@@ -140,6 +140,20 @@ def getCorrespondingRole(message, emoji):
         if(roles[i][1] == role.mention):
             return role
 
+def getMentionsFromMessage(message):
+    """Retorna uma lista de usuarios mencionados na ordem da mensagem"""
+    users = []
+
+    for user in re.findall(r'<@\d*>', message.content):
+        users.append(user)
+
+    for i in range(len(users)):
+        for member in message.mentions:
+            if(users[i] == member.mention):
+                users[i] = member
+
+    return users
+
 def usuarioJaRegistrado(userID):
     """Verifica se a ficha ja esta registrada no arquivo de fichas"""
     file = open("data/usuarios.txt", "r")
