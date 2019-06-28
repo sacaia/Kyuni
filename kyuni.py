@@ -300,14 +300,23 @@ async def on_message(message):
     if(not message.content.startswith(client.command_prefix)):
         message.content = contentOriginal
 
-        message.content = message.content.replace(client.command_prefix + "cl", client.command_prefix + "clear", 1)
-
     if(message.content.startswith(client.command_prefix + "novaficha")):
         i = re.search("novaficha", message.content).end()
         message.content = message.content[:i] + contentOriginal[i:]
     if (message.content.startswith(client.command_prefix + "ficha")):
         i = re.search("ficha", message.content).end()
         message.content = message.content[:i] + contentOriginal[i:]
+    if (message.content.startswith(client.command_prefix + "editficha")):
+        i = re.search("editficha", message.content).end()
+        message.content = message.content[:i] + contentOriginal[i:]
+    if (message.content.startswith(client.command_prefix + "delficha")):
+        i = re.search("delficha", message.content).end()
+        message.content = message.content[:i] + contentOriginal[i:]
+
+    if (message.content.startswith(client.command_prefix + "cl")):
+        message.content = message.content.replace(client.command_prefix + "cl", client.command_prefix + "clear", 1)
+    if (message.content.startswith(client.command_prefix + "fichas")):
+        message.content = message.content.replace(client.command_prefix + "fichas", client.command_prefix + "ficha", 1)
 
     await client.process_commands(message)
 
@@ -712,7 +721,7 @@ async def novaficha(ctx, *, nome):
         await ctx.send(ctx.author.mention + ", você tem 10 minutos para mandar a descrição e uma imagem para seu personagem")
         msg = await client.wait_for('message',timeout=600.0, check=check)
     except asyncio.TimeoutError:
-        await ctx.send(ctx.author.mention + "tempo esgotado, tente novamente quando tiver tudo na mão")
+        await ctx.send(ctx.author.mention + "tempo esgotado, tente novamente quando tiver tudo em mãos")
     else:
         if(not msg.attachments):
             await ctx.send("Sua ficha não terá uma imagem, caso queira adicionar uma, use o comando `.editficha`")
@@ -728,13 +737,98 @@ async def novaficha(ctx, *, nome):
         usuario.addFicha(dados.Ficha(nome, msg.content, imgURL))
         gerenciadorDeDados.updateUsuario(usuario)
 
-        await ctx.send("ficha criada com sucesso!\nPara consultar suas fichas use `.ficha`")
+        await ctx.send("ficha criada com sucesso!\nPara consultar suas fichas use `.fichas`")
 
 @novaficha.error
 async def novaficha_error(ctx, error):
     """Trata erros de parâmetros do `.novaficha`"""
     if isinstance(error, discord.ext.commands.errors.MissingRequiredArgument):
-        await ctx.send("" + ctx.author.mention + ", dê um nome ao seu personagem")
+        await ctx.send(ctx.author.mention + ", dê um nome ao seu personagem")
+    else:
+        print(error)
+
+####################.EDITFICHA###########################
+@client.command()
+async def editficha(ctx, *, nome):
+    """Edita uma ficha de personagem para o respectivo usuario"""
+    usuario = gerenciadorDeDados.getUsuario(ctx.author.id)
+    if (usuario is None):
+        await ctx.send(ctx.author.mention + ", você não possui nenhuma ficha, procure usar o comando `.novaficha`")
+        return
+
+    if(not gerenciadorDeDados.fichaJaRegistrada(ctx.author.id, nome)):
+        await ctx.send(ctx.author.mention + ", você não possui uma ficha chamada `" + nome + "`")
+        return
+
+    def check(m):
+        """Checa se a mensagem foi mandada no mesmo canal e pelo mesmo usuario"""
+        return m.channel == ctx.message.channel and m.author == ctx.author
+    try:
+        await ctx.send(ctx.author.mention + ", você tem 10 minutos para mandar a descrição e uma imagem para seu personagem")
+        msg = await client.wait_for('message',timeout=600.0, check=check)
+    except asyncio.TimeoutError:
+        await ctx.send(ctx.author.mention + "tempo esgotado, tente novamente quando tiver tudo em mãos")
+    else:
+        if(not msg.attachments and msg.content != ""):
+            #muda só a descrição
+            fichaEditavel = usuario.getFicha(nome)
+            fichaEditavel.setDescricao(msg.content)
+        elif(msg.attachments and msg.content == ""):
+            #muda só a imagem
+            fichaEditavel = usuario.getFicha(nome)
+            fichaEditavel.setImgURL(msg.attachments[0].url)
+        else:
+            fichaEditavel = dados.Ficha(nome, msg.content, msg.attachments[0].url)
+
+        usuario.editFicha(fichaEditavel)
+        gerenciadorDeDados.updateUsuario(usuario)
+
+        await ctx.send("ficha atualizada com sucesso!\nPara consultar suas fichas use `.fichas`")
+
+@editficha.error
+async def editficha_error(ctx, error):
+    """Trata erros de parâmetros do `.editficha`"""
+    if isinstance(error, discord.ext.commands.errors.MissingRequiredArgument):
+        await ctx.send(ctx.author.mention + ", dê o nome da ficha que pretende editar")
+    else:
+        print(error)
+
+####################.DELFICHA###########################
+@client.command()
+async def delficha(ctx, *, nome):
+    """Deleta uma ficha de personagem para o respectivo usuario"""
+    usuario = gerenciadorDeDados.getUsuario(ctx.author.id)
+    if (usuario is None):
+        await ctx.send(ctx.author.mention + ", você não possui nenhuma ficha, procure usar o comando `.novaficha`")
+        return
+
+    if(not gerenciadorDeDados.fichaJaRegistrada(ctx.author.id, nome)):
+        await ctx.send(ctx.author.mention + ", você não possui uma ficha chamada `" + nome + "`")
+        return
+
+    await ctx.send(ctx.author.mention + ", tem certeza que quer excluir `" + nome + "`? (s/n)")
+    def check(m):
+        """Checa se a mensagem foi mandada no mesmo canal e pelo mesmo usuario"""
+        return m.channel == ctx.message.channel and m.author == ctx.author and m.content in ["s", "n", "S", "N", "sim", "nao", "não", "Sim", "Nao", "Não"]
+    try:
+        msg = await client.wait_for('message',timeout=60.0, check=check)
+    except asyncio.TimeoutError:
+        await ctx.send(ctx.author.mention + ", como você não me respondeu achei melhor não excluir `" + nome + "`")
+    else:
+        if(msg.content in ["n", "N", "nao", "não", "Nao", "Não"]):
+            await ctx.send(ctx.author.mention + ", ok, não excluirei `" + nome + "`")
+            return
+
+        usuario.delFicha(nome)
+        gerenciadorDeDados.updateUsuario(usuario)
+
+        await ctx.send("ficha excluida com sucesso!\nPara consultar suas fichas use `.fichas`")
+
+@delficha.error
+async def delficha_error(ctx, error):
+    """Trata erros de parâmetros do `.delficha`"""
+    if isinstance(error, discord.ext.commands.errors.MissingRequiredArgument):
+        await ctx.send(ctx.author.mention + ", dê o nome da ficha que pretende excluir")
     else:
         print(error)
 
