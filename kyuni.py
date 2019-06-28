@@ -30,7 +30,7 @@ embed_help.title = "Lista de comandos"
 embed_help.description = "Para usar qualquer comando basta usar `.<comando>`\n"
 embed_help.description += "**Ações:**\n`bite` `slap` `cry` `highfive` `blush` `lick` `pat` `hug` `cuddle` `nuzzle` `kiss`\n"
 embed_help.description += "**RPG:**\n`roll` `ficha` `novaficha` `editficha` `delficha`\n"
-embed_help.description += "**Staff:**\n`clear` `log` `rolepicker`\n"
+embed_help.description += "**Staff:**\n`clear` `log` `rolepicker` `modrole`\n"
 embed_help.set_footer(text="Para informações sobre cada comando use `.help <comando>`")
 ##############EMBED-BITE##############
 embed_bite = discord.Embed()
@@ -137,16 +137,6 @@ embed_roll.description += "`<repetições>` *__Opcional__: Número de vezes que 
 embed_roll.description += "`<buff/nerf>` *__Opcional__: Caso precise mudar o resultado do dado de alguma maneira, para buffar ou nerfar a ação do jogador, "
 embed_roll.description += "pode usar um `oX` onde `o` é um operador matemático(operadores suportados: [+, -, *, x, /, ^, %]) e `X` um numero real(casas decimais são aceitas). Caso seja omitido será considerado um lançamento normal\n\n"
 #embed_roll.set_footer(text="Pode-se escrever .roll 3x d6, 2x d20 para facilitar o entendimento")
-##############EMBED-FICHA##############
-embed_ficha = discord.Embed()
-embed_ficha.colour = discord.Colour.dark_purple()
-#embed_ficha.set_thumbnail(url="https://cdn.discordapp.com/attachments/592521078597746698/592882908239495170/roll.jpg")
-embed_ficha.title = "Ficha help"
-embed_ficha.description = "`.ficha @user* <nome>*` : *lista as fichas de um usuario ou mostra a ficha especificada*\n`.fichas @user* <nome>*` também pode ser utilizado\n"
-embed_ficha.description += "Dependendo dos parâmetros fornecidos exibe a lista de fichas de um usuario(somente o parâmetro `@user`) ou uma ficha específica(ambos os parâmetros)\n\n"
-embed_ficha.description += "**Parâmetros**\n`@user` *__Opcional__: O usuário que pretende consultar. Caso seja omitido será considerado você mesmo\n"
-embed_ficha.description += "`<nome>` *__Opcional__: Nome da ficha que pretende consultar\n"
-embed_roll.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-NOVAFICHA##############
 embed_novaficha = discord.Embed()
 embed_novaficha.colour = discord.Colour.dark_purple()
@@ -176,6 +166,16 @@ embed_delficha.description = "`.delficha <nome>` : *Exclui uma ficha com o nome 
 embed_delficha.description += "Pede uma confirmação dentro de um minuto antes de efetivamente excluir a ficha\n\n"
 embed_delficha.description += "**Parâmetros**\n`<nome>` : O nome da ficha que pretende excluir\n"
 #embed_delficha.set_footer(text="")
+##############EMBED-FICHA##############
+embed_ficha = discord.Embed()
+embed_ficha.colour = discord.Colour.dark_purple()
+#embed_ficha.set_thumbnail(url="https://cdn.discordapp.com/attachments/592521078597746698/592882908239495170/roll.jpg")
+embed_ficha.title = "Ficha help"
+embed_ficha.description = "`.ficha @user* <nome>*` : *lista as fichas de um usuario ou mostra a ficha especificada*\n`.fichas @user* <nome>*` também pode ser utilizado\n"
+embed_ficha.description += "Dependendo dos parâmetros fornecidos exibe a lista de fichas de um usuario(somente o parâmetro `@user`) ou uma ficha específica(ambos os parâmetros)\n\n"
+embed_ficha.description += "**Parâmetros**\n`@user` *__Opcional__: O usuário que pretende consultar. Caso seja omitido será considerado você mesmo\n"
+embed_ficha.description += "`<nome>` *__Opcional__: Nome da ficha que pretende consultar\n"
+embed_roll.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
 ##############EMBED-CLEAR##############
 embed_clear = discord.Embed()
 embed_clear.colour = discord.Colour.dark_purple()
@@ -183,7 +183,7 @@ embed_clear.colour = discord.Colour.dark_purple()
 embed_clear.title = "Clear help"
 embed_clear.description = "`.clear <qtd>` : *deleta a `<qtd>` de mensagens no canal*\n`.cl <qtd>` também pode ser utilizado\n\n"
 embed_clear.description += "**Parâmetros**\n`<qtd>` : Deve ser um _numero inteiro_ correspondente a quantidade de mensagens que se deseja apagar (limite de 100 mensagens por vez)"
-embed_clear.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador")
+embed_clear.set_footer(text="É preciso ter a permissão para excluir mensagens ou possuir o cargo de mod")
 ##############EMBED-LOG##############
 embed_log = discord.Embed()
 embed_log.colour = discord.Colour.dark_purple()
@@ -193,7 +193,7 @@ embed_log.description = "`.log <#canal>` : *define `<#canal>` como o canal de lo
 embed_log.description += "Caso um canal já tenha sido definido este será atualizado para o novo `<#canal>`\n\n"
 embed_log.description += "**Parâmetros**\n`<#canal>` : Deve ser uma __mensão a um canal textual__ correspondente ao canal que se deseja mandar as mensagens de log\n\n"
 embed_log.description += "**Extenções**\n`-clear` : Não necessita de parâmetros. Remove o canal de log do servidor"
-embed_log.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador")
+embed_log.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador ou possuir o cargo de mod")
 ##############EMBED-ROLEPICKER##############
 embed_rolepicker = discord.Embed()
 embed_rolepicker.colour = discord.Colour.dark_purple()
@@ -205,7 +205,17 @@ embed_rolepicker.description += "A mensagem pode conter textos, menções, image
 embed_rolepicker.description += "Para **editar** o `rolepicker` basta editar a mensagem, mantendo a quantidade de __menções de cargos__ iguais a de __emojis__\n"
 embed_rolepicker.description += "Para **excluir** o `rolepicker` basta excluir a mensagem\n\n"
 embed_rolepicker.description += "**Parâmetros**\n`<#canal>` : Deve ser uma __mensão a um canal textual__ correspondente ao canal que se deseja mandar a mensagens de log\n\n"
-embed_log.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador")
+embed_log.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador ou possuir o cargo de mod")
+##############EMBED-MODROLE##############
+embed_modrole = discord.Embed()
+embed_modrole.colour = discord.Colour.dark_purple()
+#embed_modrole.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589152146646237192/highfive.png")
+embed_modrole.title = "Modrole help"
+embed_modrole.description = "`.modrole @role` : *define `@role` como o cargo de mod do servidor*\n"
+embed_modrole.description += "Caso um cargo já tenha sido definido este será atualizado para o novo `@role`\n\n"
+embed_modrole.description += "**Parâmetros**\n`@role` : Deve ser uma __mensão a um cargo__ correspondente ao cargo que se deseja transformar em mod para a Kyuni\n\n"
+embed_modrole.description += "**Extenções**\n`-clear` : Não necessita de parâmetros. Remove o cargo de mod do servidor"
+embed_modrole.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador ou possuir o cargo de mod")
 ######################################
 
 client = commands.Bot(command_prefix=".")
@@ -213,6 +223,40 @@ client.remove_command("help")
 client.activity = activity
 #client.__setattr__("command_prefix", "!")
 
+##############CHECKS##############
+def ehDono():
+    """Check para saber se o usuario do comando é o dono do server"""
+    async def inter_ehDono(ctx):
+        """Comando interno do ehDono"""
+        return ctx.author.id == ctx.guild.owner_id
+    return commands.check(inter_ehDono)
+
+def ehMod():
+    """Check para saber se o usuario tem a permissão de moderador ou tem o cargo mod desse servidor"""
+    async def inter_ehMod(ctx):
+        """Comando interno do edMod"""
+        server = gerenciadorDeDados.getServer(ctx.guild.id)
+        for role in ctx.author.roles:
+            if(role.id == server.modRoleID):
+                return True
+
+        return commands.has_permissions(administrator=True)
+    return commands.check(inter_ehMod)
+
+def ehMessageManager():
+    """Check para saber se o usuario tem a permissão manage_messages ou tem o cargo mod desse servidor"""
+    async def inter_ehMessageManager(ctx):
+        """Comando interno do ehMessageManager"""
+        server = gerenciadorDeDados.getServer(ctx.guild.id)
+        for role in ctx.author.roles:
+            if (role.id == server.modRoleID):
+                return True
+
+        return commands.has_permissions(manage_messages=True)
+
+    return commands.check(inter_ehMessageManager)
+
+######################################
 @client.event
 async def on_ready():
     """Log para saber se o bot está on-line"""
@@ -713,7 +757,7 @@ async def roll(ctx):
 ####################.NOVAFICHA###########################
 @client.command()
 async def novaficha(ctx, *, nome):
-    """Cria nova ficha de personagem para o respectivo usuario"""
+    """`.novaficha <nome>` : Cria uma nova ficha com o nome especificado"""
     if(gerenciadorDeDados.fichaJaRegistrada(ctx.author.id, nome)):
         await ctx.send(ctx.author.mention + ", você já possui uma ficha chamada `" + nome + "`")
         return
@@ -757,7 +801,7 @@ async def novaficha_error(ctx, error):
 ####################.EDITFICHA###########################
 @client.command()
 async def editficha(ctx, *, nome):
-    """Edita uma ficha de personagem para o respectivo usuario"""
+    """`.editficha <nome>` : Edita uma ficha com o nome especificado"""
     usuario = gerenciadorDeDados.getUsuario(ctx.author.id)
     if (usuario is None):
         await ctx.send(ctx.author.mention + ", você não possui nenhuma ficha, procure usar o comando `.novaficha`")
@@ -803,7 +847,7 @@ async def editficha_error(ctx, error):
 ####################.DELFICHA###########################
 @client.command()
 async def delficha(ctx, *, nome):
-    """Deleta uma ficha de personagem para o respectivo usuario"""
+    """`.delficha <nome>` : Exclui uma ficha com o nome especificado"""
     usuario = gerenciadorDeDados.getUsuario(ctx.author.id)
     if (usuario is None):
         await ctx.send(ctx.author.mention + ", você não possui nenhuma ficha, procure usar o comando `.novaficha`")
@@ -842,7 +886,8 @@ async def delficha_error(ctx, error):
 ####################.FICHA###########################
 @client.command()
 async def ficha(ctx):
-    """Mostra a lista de fichas de personagens para o respectivo usuario, ou a uma ficha de personagem de um usuario"""
+    """`.ficha @user* <nome>*` : lista as fichas de um usuario ou mostra a ficha especificada
+    `.fichas @user* <nome>*` também pode ser utilizado"""
     content = ctx.message.content
     if(not ctx.message.mentions):
         user = ctx.author
@@ -868,16 +913,16 @@ async def ficha(ctx):
         if(fichaProcurada is None):
             await ctx.send("Não encontrei a ficha: `" + nome + "`")
             return
-        embed_ficha = discord.Embed(title=fichaProcurada.nome, description=fichaProcurada.descricao)
+        embedFicha = discord.Embed(title=fichaProcurada.nome, description=fichaProcurada.descricao)
         if(fichaProcurada.imgURL is not None):
-            embed_ficha.set_thumbnail(url=fichaProcurada.imgURL)
-        embed_ficha.colour = ctx.author.color
-        await ctx.send(embed=embed_ficha)
+            embedFicha.set_thumbnail(url=fichaProcurada.imgURL)
+            embedFicha.colour = ctx.author.color
+        await ctx.send(embed=embedFicha)
 
 ####################.CLEAR###########################
 @client.command()
 @commands.guild_only()
-@commands.has_permissions(manage_messages=True)
+@ehMessageManager()
 async def clear(ctx, qtd: int):
     """`.clear <qtd>` : deleta a `<qtd>` de mensagens no canal
     `cl <qtd>` também pode ser utilizado"""
@@ -888,7 +933,7 @@ async def clear(ctx, qtd: int):
 @clear.error
 async def clear_error(ctx, error):
     """Trata erros de permissão e parâmetros do `.clear`"""
-    if isinstance(error, discord.ext.commands.errors.MissingPermissions):
+    if isinstance(error, discord.ext.commands.errors.CheckFailure):
         await ctx.send("Desculpe-me " + ctx.author.mention + " você não tem permissão para isso")
     elif isinstance(error, discord.ext.commands.errors.MissingRequiredArgument):
         await ctx.send("" + ctx.author.mention + ", especifique quantas mensagens deseja limpar")
@@ -900,12 +945,14 @@ async def clear_error(ctx, error):
 ####################.LOG###########################
 @client.command()
 @commands.guild_only()
-@commands.has_permissions(administrator=True)
+@ehMod()
 async def log(ctx):
     """`.log <#canal>` : define `<#canal>` como o canal de log do servidor"""
     if ("-clear" in ctx.message.content):
         server = gerenciadorDeDados.getServer(ctx.message.guild.id)
+        server.setLogChannelID(None)
         gerenciadorDeDados.updateServer(server)
+        await ctx.send("Canal de log removido")
 
     else:
         if(not len(ctx.message.channel_mentions) == 1):
@@ -919,13 +966,14 @@ async def log(ctx):
 @log.error
 async def log_error(ctx, error):
     """Trata erros de permissão do `.log`"""
-    if isinstance(error, discord.ext.commands.errors.MissingPermissions):
+    print(type(error))
+    if isinstance(error, discord.ext.commands.errors.CheckFailure):
         await ctx.send("Desculpe-me " + ctx.author.mention + " você não tem permissão para isso")
 
 ####################.ROLEPICKER###########################
 @client.command()
 @commands.guild_only()
-@commands.has_permissions(administrator=True)
+@ehMod()
 async def rolepicker(ctx):
     """`.rolepicker <#canal>` : Espera receber um `rolepicker` valido no `<#canal>` especificado"""
     if(not len(ctx.message.channel_mentions) == 1):
@@ -955,15 +1003,41 @@ async def rolepicker(ctx):
 
             await ctx.send("rolepicker criado com sucesso!")
 
-
-
 @rolepicker.error
 async def rolepicker_error(ctx, error):
     """Trata erros de permissão do `.rolepicker`"""
-    if isinstance(error, discord.ext.commands.errors.MissingPermissions):
+    if isinstance(error, discord.ext.commands.errors.CheckFailure):
         await ctx.send("Desculpe-me " + ctx.author.mention + " você não tem permissão para isso")
     else:
         print(error)
+
+####################.MODROLE###########################
+@client.command()
+@commands.guild_only()
+@ehDono()
+async def modrole(ctx):
+    """"""
+    if ("-clear" in ctx.message.content):
+        server = gerenciadorDeDados.getServer(ctx.message.guild.id)
+        server.setModRoleID(None)
+        gerenciadorDeDados.updateServer(server)
+        await ctx.send("Cargo mod removido")
+
+    else:
+        if(not len(ctx.message.role_mentions) == 1):
+            await ctx.send("Por favor, mencione apenas um cargo para ser o cargo de mod")
+
+        server = gerenciadorDeDados.getServer(ctx.message.guild.id)
+        server.setModRoleID(ctx.message.role_mentions[0].id)
+        gerenciadorDeDados.updateServer(server)
+        await ctx.send("O cargo de mod foi atualizado para <@&" + str(ctx.message.role_mentions[0].id) + "> com sucesso")
+
+@modrole.error
+async def modrole_error(ctx, error):
+    """Trata erros de permissão do `.modrole`"""
+    if isinstance(error, discord.ext.commands.errors.CheckFailure):
+        await ctx.send("Desculpe-me " + ctx.author.mention + " somente o dono do server pode usar este comando")
+
 
 ####################.HELP###########################
 @client.command()
@@ -1045,6 +1119,9 @@ async def help(ctx):
         await ctx.send(embed=embed_ficha)
         return
 
+    elif ("modrole" in ctx.message.content):
+        await ctx.send(embed=embed_modrole)
+        return
 
     await ctx.send(embed=embed_help)
     return

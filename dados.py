@@ -7,9 +7,10 @@ def EMOJIS():
 
 class Server:
     """Classe que define um server e seus dados para uso do bot"""
-    def __init__(self, serverID, logChannelID = None, rolepickerIDs = None):
+    def __init__(self, serverID, logChannelID = None, modRoleID = None, rolepickerIDs = None):
         self.serverID = serverID
         self.logChannelID = logChannelID
+        self.modRoleID = modRoleID
         if(rolepickerIDs is None):
             self.rolepickerIDs = []
         else:
@@ -19,6 +20,7 @@ class Server:
         """\"Construtor de copia\""""
         self.serverID = server.serverID
         self.logChannelID = server.logChannelID
+        self.modRoleID = server.modRoleID
         self.rolepickerIDs = server.rolepickerIDs
 
     def setServerId(self, novoID):
@@ -36,6 +38,14 @@ class Server:
     def getLogChannelID(self):
         """Getter do logChannelID"""
         return self.logChannelID
+
+    def setModRoleID(self, novoID):
+        """Setter do serverID"""
+        self.modRoleID = novoID
+
+    def getModRoleID(self):
+        """Getter do serverID"""
+        return self.modRoleID
 
     def setRolepickerIDs(self, ids):
         """Setter do rolepickersIDs"""

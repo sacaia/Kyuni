@@ -30,7 +30,7 @@ def getServer(serverID):
             server = json.loads(l)
             if (server["serverID"] == serverID):
                 file.close()
-                return dados.Server(server["serverID"], server["logChannelID"], server["rolepickerIDs"])
+                return dados.Server(server["serverID"], server["logChannelID"], server["modRoleID"], server["rolepickerIDs"])
         except:
             pass
 
@@ -54,6 +54,7 @@ def updateServer(server):
         sv = json.loads(l)
         if (sv["serverID"] == server.serverID):
             sv["logChannelID"] = server.logChannelID
+            sv["modRoleID"] = server.modRoleID
             sv["rolepickerIDs"] = server.rolepickerIDs
             linha = json.dumps(sv) + "\n"
         novasLinhas.append(linha)
