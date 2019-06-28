@@ -29,7 +29,7 @@ embed_help.colour = discord.Colour.dark_purple()
 embed_help.title = "Lista de comandos"
 embed_help.description = "Para usar qualquer comando basta usar `.<comando>`\n"
 embed_help.description += "**Ações:**\n`bite` `slap` `cry` `highfive` `blush` `lick` `pat` `hug` `cuddle` `nuzzle` `kiss`\n"
-embed_help.description += "**RPG:**\n`roll`\n"
+embed_help.description += "**RPG:**\n`roll` `ficha` `novaficha` `editficha` `delficha`\n"
 embed_help.description += "**Staff:**\n`clear` `log` `rolepicker`\n"
 embed_help.set_footer(text="Para informações sobre cada comando use `.help <comando>`")
 ##############EMBED-BITE##############
@@ -137,12 +137,51 @@ embed_roll.description += "`<repetições>` *__Opcional__: Número de vezes que 
 embed_roll.description += "`<buff/nerf>` *__Opcional__: Caso precise mudar o resultado do dado de alguma maneira, para buffar ou nerfar a ação do jogador, "
 embed_roll.description += "pode usar um `oX` onde `o` é um operador matemático(operadores suportados: [+, -, *, x, /, ^, %]) e `X` um numero real(casas decimais são aceitas). Caso seja omitido será considerado um lançamento normal\n\n"
 #embed_roll.set_footer(text="Pode-se escrever .roll 3x d6, 2x d20 para facilitar o entendimento")
+##############EMBED-FICHA##############
+embed_ficha = discord.Embed()
+embed_ficha.colour = discord.Colour.dark_purple()
+#embed_ficha.set_thumbnail(url="https://cdn.discordapp.com/attachments/592521078597746698/592882908239495170/roll.jpg")
+embed_ficha.title = "Ficha help"
+embed_ficha.description = "`.ficha @user* <nome>*` : *lista as fichas de um usuario ou mostra a ficha especificada*\n`.fichas @user* <nome>*` também pode ser utilizado\n"
+embed_ficha.description += "Dependendo dos parâmetros fornecidos exibe a lista de fichas de um usuario(somente o parâmetro `@user`) ou uma ficha específica(ambos os parâmetros)\n\n"
+embed_ficha.description += "**Parâmetros**\n`@user` *__Opcional__: O usuário que pretende consultar. Caso seja omitido será considerado você mesmo\n"
+embed_ficha.description += "`<nome>` *__Opcional__: Nome da ficha que pretende consultar\n"
+embed_roll.set_footer(text="@everyone e @here, bem como cargos não são parâmetros válidos")
+##############EMBED-NOVAFICHA##############
+embed_novaficha = discord.Embed()
+embed_novaficha.colour = discord.Colour.dark_purple()
+#embed_novaficha.set_thumbnail(url="https://cdn.discordapp.com/attachments/592521078597746698/592882908239495170/roll.jpg")
+embed_novaficha.title = "Novaficha help"
+embed_novaficha.description = "`.novaficha <nome>` : *Cria uma nova ficha com o nome especificado*\n"
+embed_novaficha.description += "Espera receber uma segunda mensagem com o conteúdo da ficha, que é composto por um texto e pode ter uma imagem ilustrativa, basta anexar uma imagem à mensagem\n\n"
+embed_novaficha.description += "**Parâmetros**\n`<nome>` : O nome da ficha que pretende criar\n"
+embed_novaficha.set_footer(text="Caso erre alguma coisa você sempre pode editar sua ficha com o \".editficha\"")
+##############EMBED-EDITFICHA##############
+embed_editficha = discord.Embed()
+embed_editficha.colour = discord.Colour.dark_purple()
+#embed_editficha.set_thumbnail(url="https://cdn.discordapp.com/attachments/592521078597746698/592882908239495170/roll.jpg")
+embed_editficha.title = "Editficha help"
+embed_editficha.description = "`.editficha <nome>` : *Edita uma ficha com o nome especificado*\n"
+embed_editficha.description += "Espera receber uma segunda mensagem com o novo conteúdo da ficha, que é composto por um texto e pode ter uma imagem ilustrativa, basta anexar uma imagem à mensagem.\n"
+embed_editficha.description += "Caso deseje mudar somente a descrição ou a imagem pode-se omitir o outro elemento\n"
+embed_editficha.description += "Dica: Caso deseje alterar alguma coisa no seu antigo texto pode-se consulta-lo pelo metodo `.ficha` e copiar o antigo conteúdo\n\n"
+embed_editficha.description += "**Parâmetros**\n`<nome>` : O nome da ficha que pretende editar\n"
+embed_editficha.set_footer(text="Não é possivel mudar o nome de uma ficha, para isso pode-se excluir esta ficha(.delficha) e criar uma nova(.novaficha)")
+##############EMBED-DELFICHA##############
+embed_delficha = discord.Embed()
+embed_delficha.colour = discord.Colour.dark_purple()
+#embed_delficha.set_thumbnail(url="https://cdn.discordapp.com/attachments/592521078597746698/592882908239495170/roll.jpg")
+embed_delficha.title = "Delficha help"
+embed_delficha.description = "`.delficha <nome>` : *Exclui uma ficha com o nome especificado*\n"
+embed_delficha.description += "Pede uma confirmação dentro de um minuto antes de efetivamente excluir a ficha\n\n"
+embed_delficha.description += "**Parâmetros**\n`<nome>` : O nome da ficha que pretende excluir\n"
+#embed_delficha.set_footer(text="")
 ##############EMBED-CLEAR##############
 embed_clear = discord.Embed()
 embed_clear.colour = discord.Colour.dark_purple()
 #embed_clear.set_thumbnail(url="https://cdn.discordapp.com/attachments/588893416746647553/589152146646237192/highfive.png")
 embed_clear.title = "Clear help"
-embed_clear.description = "`.clear <qtd>` : *deleta a `<qtd>` de mensagens no canal*\n`cl <qtd>` também pode ser utilizado\n\n"
+embed_clear.description = "`.clear <qtd>` : *deleta a `<qtd>` de mensagens no canal*\n`.cl <qtd>` também pode ser utilizado\n\n"
 embed_clear.description += "**Parâmetros**\n`<qtd>` : Deve ser um _numero inteiro_ correspondente a quantidade de mensagens que se deseja apagar (limite de 100 mensagens por vez)"
 embed_clear.set_footer(text="Assim como outros comandos da staff, é preciso ser um administrador")
 ##############EMBED-LOG##############
@@ -671,41 +710,6 @@ async def roll(ctx):
 
     await ctx.send(ret)
 
-####################.FICHA###########################
-@client.command()
-async def ficha(ctx):
-    """Mostra a lista de fichas de personagens para o respectivo usuario, ou a uma ficha de personagem de um usuario"""
-    content = ctx.message.content
-    if(not ctx.message.mentions):
-        user = ctx.author
-    else:
-        user = ctx.message.mentions[0]
-        for user in ctx.message.mentions:
-            content = content.replace(user.mention, "")
-
-    nome = content[re.search("ficha", content).end():].strip()
-
-    usu = gerenciadorDeDados.getUsuario(user.id)
-    if(usu is None):
-        await ctx.send(user.display_name + " não tem nenhuma ficha")
-        return
-
-    if nome == "":
-        msg = "Fichas de " + user.display_name + ": \n"
-        for nome in usu.listaNomeFichas():
-            msg += "`" + nome + "`\n"
-        await ctx.send(msg)
-    else:
-        fichaProcurada = usu.getFicha(nome)
-        if(fichaProcurada is None):
-            await ctx.send("Não encontrei a ficha: `" + nome + "`")
-            return
-        embed_ficha = discord.Embed(title=fichaProcurada.nome, description=fichaProcurada.descricao)
-        if(fichaProcurada.imgURL is not None):
-            embed_ficha.set_thumbnail(url=fichaProcurada.imgURL)
-        embed_ficha.colour = ctx.author.color
-        await ctx.send(embed=embed_ficha)
-
 ####################.NOVAFICHA###########################
 @client.command()
 async def novaficha(ctx, *, nome):
@@ -728,6 +732,9 @@ async def novaficha(ctx, *, nome):
             imgURL = None
         else:
             imgURL = msg.attachments[0].url
+
+        if(msg.content == ""):
+            await ctx.send("Sua ficha não terá uma descrição, caso queira adicionar uma, use o comando `.editficha`")
 
         usuario = gerenciadorDeDados.getUsuario(ctx.author.id)
         if(usuario is None): # primeira ficha do usuario
@@ -831,6 +838,41 @@ async def delficha_error(ctx, error):
         await ctx.send(ctx.author.mention + ", dê o nome da ficha que pretende excluir")
     else:
         print(error)
+
+####################.FICHA###########################
+@client.command()
+async def ficha(ctx):
+    """Mostra a lista de fichas de personagens para o respectivo usuario, ou a uma ficha de personagem de um usuario"""
+    content = ctx.message.content
+    if(not ctx.message.mentions):
+        user = ctx.author
+    else:
+        user = ctx.message.mentions[0]
+        for user in ctx.message.mentions:
+            content = content.replace(user.mention, "")
+
+    nome = content[re.search("ficha", content).end():].strip()
+
+    usu = gerenciadorDeDados.getUsuario(user.id)
+    if(usu is None):
+        await ctx.send(user.display_name + " não tem nenhuma ficha")
+        return
+
+    if nome == "":
+        msg = "Fichas de " + user.display_name + ": \n"
+        for nome in usu.listaNomeFichas():
+            msg += "`" + nome + "`\n"
+        await ctx.send(msg)
+    else:
+        fichaProcurada = usu.getFicha(nome)
+        if(fichaProcurada is None):
+            await ctx.send("Não encontrei a ficha: `" + nome + "`")
+            return
+        embed_ficha = discord.Embed(title=fichaProcurada.nome, description=fichaProcurada.descricao)
+        if(fichaProcurada.imgURL is not None):
+            embed_ficha.set_thumbnail(url=fichaProcurada.imgURL)
+        embed_ficha.colour = ctx.author.color
+        await ctx.send(embed=embed_ficha)
 
 ####################.CLEAR###########################
 @client.command()
@@ -986,6 +1028,23 @@ async def help(ctx):
     elif ("roll" in ctx.message.content):
         await ctx.send(embed=embed_roll)
         return
+
+    elif ("novaficha" in ctx.message.content):
+        await ctx.send(embed=embed_novaficha)
+        return
+
+    elif ("editficha" in ctx.message.content):
+        await ctx.send(embed=embed_editficha)
+        return
+
+    elif ("delficha" in ctx.message.content):
+        await ctx.send(embed=embed_delficha)
+        return
+
+    elif ("ficha" in ctx.message.content):
+        await ctx.send(embed=embed_ficha)
+        return
+
 
     await ctx.send(embed=embed_help)
     return
