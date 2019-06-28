@@ -899,4 +899,3 @@ async def help(ctx):
 
 
 client.run(os.environ["TOKEN"])
-client.run("NTg4ODYyNzAzNDYwOTQxODU0.XRAhzA.5DW5FDM1EyOuU3NvjCFMt6znkWE")
