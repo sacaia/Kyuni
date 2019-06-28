@@ -4,7 +4,7 @@
     <list default="true" id="4f5f15e0-f72b-4904-9cf5-6ed2891a4cf9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dados.py" beforeDir="false" afterPath="$PROJECT_DIR$/dados.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gerenciadorDeDados.py" beforeDir="false" afterPath="$PROJECT_DIR$/gerenciadorDeDados.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/usuarios.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/usuarios.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kyuni.py" beforeDir="false" afterPath="$PROJECT_DIR$/kyuni.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -16,7 +16,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Bot$kyuni.coverage" NAME="kyuni Coverage Results" MODIFIED="1561019969497" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Bot$bot.coverage" NAME="bot Coverage Results" MODIFIED="1560800134746" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Kyuni$kyuni.coverage" NAME="kyuni Coverage Results" MODIFIED="1561674705387" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Kyuni$kyuni.coverage" NAME="kyuni Coverage Results" MODIFIED="1561688756722" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -80,12 +80,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="11225" />
+          <entry key="py" value="12498" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="11225" />
+          <entry key="Python" value="12498" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -105,10 +105,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kyuni.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="26">
-              <caret line="699" lean-forward="true" selection-start-line="699" selection-end-line="699" />
+            <state relative-caret-position="242">
+              <caret line="830" column="86" selection-start-line="830" selection-start-column="86" selection-end-line="830" selection-end-column="86" />
               <folding>
-                <marker date="1561680194677" expanded="true" signature="33689:33936" ph="..." />
+                <marker date="1561688755028" expanded="true" signature="34281:38442" ph="..." />
               </folding>
             </state>
           </provider>
@@ -117,8 +117,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gerenciadorDeDados.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-241">
-              <caret line="170" column="4" selection-start-line="170" selection-start-column="4" selection-end-line="170" selection-end-column="4" />
+            <state relative-caret-position="235">
+              <caret line="201" column="24" selection-start-line="201" selection-start-column="24" selection-end-line="201" selection-end-column="24" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
                 <marker date="1561666334005" expanded="true" signature="502:507" ph="..." />
@@ -131,13 +131,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dados.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+            <state relative-caret-position="286">
+              <caret line="133" column="48" selection-start-line="133" selection-start-column="48" selection-end-line="133" selection-end-column="48" />
               <folding>
-                <marker date="1561673758928" expanded="true" signature="9270:9271" ph="..." />
-                <marker date="1561673758928" expanded="true" signature="11644:11653" ph="..." />
-                <marker date="1561673758928" expanded="true" signature="12036:12161" ph="..." />
-                <marker date="1561673758928" expanded="true" signature="12669:12715" ph="..." />
+                <marker date="1561688126124" expanded="true" signature="9270:9271" ph="..." />
+                <marker date="1561688126124" expanded="true" signature="11644:11653" ph="..." />
+                <marker date="1561688126124" expanded="true" signature="12036:12161" ph="..." />
+                <marker date="1561688126124" expanded="true" signature="13220:13266" ph="..." />
               </folding>
             </state>
           </provider>
@@ -421,7 +421,7 @@
   <component name="XDebuggerManager">
     <watches-manager>
       <configuration name="PythonConfigurationType">
-        <watch expression="user.mention" />
+        <watch expression="message.content" />
       </configuration>
     </watches-manager>
   </component>
@@ -539,21 +539,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dados.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+        <state relative-caret-position="286">
+          <caret line="133" column="48" selection-start-line="133" selection-start-column="48" selection-end-line="133" selection-end-column="48" />
           <folding>
-            <marker date="1561673758928" expanded="true" signature="9270:9271" ph="..." />
-            <marker date="1561673758928" expanded="true" signature="11644:11653" ph="..." />
-            <marker date="1561673758928" expanded="true" signature="12036:12161" ph="..." />
-            <marker date="1561673758928" expanded="true" signature="12669:12715" ph="..." />
+            <marker date="1561688126124" expanded="true" signature="9270:9271" ph="..." />
+            <marker date="1561688126124" expanded="true" signature="11644:11653" ph="..." />
+            <marker date="1561688126124" expanded="true" signature="12036:12161" ph="..." />
+            <marker date="1561688126124" expanded="true" signature="13220:13266" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gerenciadorDeDados.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-241">
-          <caret line="170" column="4" selection-start-line="170" selection-start-column="4" selection-end-line="170" selection-end-column="4" />
+        <state relative-caret-position="235">
+          <caret line="201" column="24" selection-start-line="201" selection-start-column="24" selection-end-line="201" selection-end-column="24" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
             <marker date="1561666334005" expanded="true" signature="502:507" ph="..." />
@@ -564,10 +564,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/kyuni.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="699" lean-forward="true" selection-start-line="699" selection-end-line="699" />
+        <state relative-caret-position="242">
+          <caret line="830" column="86" selection-start-line="830" selection-start-column="86" selection-end-line="830" selection-end-column="86" />
           <folding>
-            <marker date="1561680194677" expanded="true" signature="33689:33936" ph="..." />
+            <marker date="1561688755028" expanded="true" signature="34281:38442" ph="..." />
           </folding>
         </state>
       </provider>

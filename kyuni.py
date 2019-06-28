@@ -300,7 +300,6 @@ async def on_message(message):
     if(not message.content.startswith(client.command_prefix)):
         message.content = contentOriginal
 
-    if(message.content.startswith(client.command_prefix + "cl")):
         message.content = message.content.replace(client.command_prefix + "cl", client.command_prefix + "clear", 1)
 
     if(message.content.startswith(client.command_prefix + "novaficha")):

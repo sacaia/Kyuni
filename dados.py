@@ -110,14 +110,28 @@ class Usuario:
         return False
 
     def addFicha(self, novaFicha):
+        """adiciona uma nova ficha, se ja não existir"""
         if(not self.existeFicha(novaFicha.nome)):
             self.fichas.append(novaFicha)
 
     def listaNomeFichas(self):
+        """Retorna uma lista com os nomes das fichas"""
         ret = []
         for ficha in self.fichas:
             ret.append(ficha.nome)
         return ret
+
+    def editFicha(self, novaFicha):
+        """Muda uma ficha já existente"""
+        for i in range(len(self.fichas)):
+            if(self.fichas[i].nome == novaFicha.nome):
+                self.fichas[i] = novaFicha
+
+    def delFicha(self, nome):
+        """Deleta a ficha com o nome fornecido"""
+        for i in range(len(self.fichas)):
+            if(self.fichas[i].nome == nome):
+                self.fichas.remove(self.fichas[i])
 
 class Ficha:
     """Classe que define uma ficha de rpg"""
