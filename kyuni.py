@@ -1009,16 +1009,23 @@ async def clear_error(ctx, error):
 async def log(ctx):
     """`.log <#canal>` : define `<#canal>` como o canal de log do servidor"""
     if ("-clear" in ctx.message.content):
-        server = gerenciadorDeDados.getServer(ctx.message.guild.id)
+        server = gerenciadorDeDados.getServer(ctx.guild.id)
         server.setLogChannelID(None)
         gerenciadorDeDados.updateServer(server)
         await ctx.send("Canal de log removido")
 
     else:
-        if(not len(ctx.message.channel_mentions) == 1):
+        if (not ctx.message.channel_mentions):
+            logChannelID = gerenciadorDeDados.getServer(ctx.guild.id).logChannelID
+            if (logChannelID is None):
+                await ctx.send("O servidor não possui um canal de log")
+            else:
+                await ctx.send("O canal de log atual é: <#" + str(logChannelID) + ">")
+
+        if(len(ctx.message.channel_mentions) > 1):
             await ctx.send("Por favor, mencione um canal para ser o canal de registro")
 
-        server = gerenciadorDeDados.getServer(ctx.message.guild.id)
+        server = gerenciadorDeDados.getServer(ctx.guild.id)
         server.setLogChannelID(ctx.message.channel_mentions[0].id)
         gerenciadorDeDados.updateServer(server)
         await ctx.send("O canal de log foi atualizado para <#" + str(ctx.message.channel_mentions[0].id) + "> com sucesso")
@@ -1026,7 +1033,6 @@ async def log(ctx):
 @log.error
 async def log_error(ctx, error):
     """Trata erros de permissão do `.log`"""
-    print(type(error))
     if isinstance(error, discord.ext.commands.errors.CheckFailure):
         await ctx.send("Desculpe-me " + ctx.author.mention + " você não tem permissão para isso")
 
@@ -1078,16 +1084,23 @@ async def rolepicker_error(ctx, error):
 async def modrole(ctx):
     """`.modrole @role` : define `@role` como o cargo de mod do servidor"""
     if ("-clear" in ctx.message.content):
-        server = gerenciadorDeDados.getServer(ctx.message.guild.id)
+        server = gerenciadorDeDados.getServer(ctx.guild.id)
         server.setModRoleID(None)
         gerenciadorDeDados.updateServer(server)
         await ctx.send("Cargo mod removido")
 
     else:
-        if(not len(ctx.message.role_mentions) == 1):
+        if (not ctx.message.role_mentions):
+            modRoleID = gerenciadorDeDados.getServer(ctx.guild.id).modRoleID
+            if (modRoleID is None):
+                await ctx.send("O servidor não possui um cargo moderador")
+            else:
+                await ctx.send("O cargo de moderador atual é: <@&" + str(modRoleID) + ">")
+
+        if(len(ctx.message.role_mentions) > 1):
             await ctx.send("Por favor, mencione apenas um cargo para ser o cargo de mod")
 
-        server = gerenciadorDeDados.getServer(ctx.message.guild.id)
+        server = gerenciadorDeDados.getServer(ctx.guild.id)
         server.setModRoleID(ctx.message.role_mentions[0].id)
         gerenciadorDeDados.updateServer(server)
         await ctx.send("O cargo de mod foi atualizado para <@&" + str(ctx.message.role_mentions[0].id) + "> com sucesso")
